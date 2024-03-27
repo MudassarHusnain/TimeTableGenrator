@@ -1,0 +1,90 @@
+<!--<h2>Sign up</h2>-->
+
+<%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%#= render "devise/shared/error_messages", resource: resource %>
+
+<!--  <div class="field">-->
+<!--    <%#= f.label :email %><br />-->
+    <%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+    <%#= f.label :password %>
+    <%# if @minimum_password_length %>
+<!--    <em>(<%#= @minimum_password_length %> characters minimum)</em>-->
+<!--    <%# end %><br />-->
+    <%#= f.password_field :password, autocomplete: "new-password" %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+<!--    <%#= f.label :password_confirmation %><br />-->
+    <%#= f.password_field :password_confirmation, autocomplete: "new-password" %>
+<!--  </div>-->
+
+<!--  <div class="actions">-->
+    <%#= f.submit "Sign up" %>
+<!--  </div>-->
+<%# end %>
+
+<%#= render "devise/shared/links" %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name),data:{turbo:false }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="">
+
+    <!-- Sign up form -->
+    <section class="">
+      <div class="container">
+        <div class="signup-content">
+          <div class="signup-form">
+            <h2 class="form-title">Sign up</h2>
+            <form method="POST" class="register-form" id="register-form">
+              <div class="form-group">
+                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                <!--              <input type="text" name="name" id="name" placeholder="Your Name"/>-->
+                <%= f.text_field :username, placeholder: "Full Name" %>
+              </div>
+              <div class="form-group">
+                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "Email" %>
+              </div>
+              <div class="form-group">
+                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                <%= f.password_field :password, autocomplete: "new-password",placeholder: "Password" %>
+              </div>
+              <br>
+              <div class="form-group">
+                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder: "Confirm Password" %>
+              </div>
+
+              <div class="ui selection dropdown">
+                <%= f.hidden_field :roles %>
+                <i class="dropdown icon"></i>
+                <div class="default text">Role</div>
+                <div class="menu scrolling">
+                  <%= f.select :roles, User.roles.map { |role,value| [role.capitalize, role] }, {}, class: "ui item selection dropdown" %>
+                </div>
+              </div>
+
+
+
+              <br/>
+              <div class="form-group form-button">
+                <%= f.submit "Sign up",class: "form-submit" %>
+              </div>
+            </form>
+          </div>
+          <div class="signup-image">
+            <figure><img <%= image_tag "signup-image.jpg" %> </figure>
+            <a href="#" class="signup-image-link"> <%= link_to "If you already Signup Login",new_user_session_path,class: "signup-image-link",style:";position:relative;text-decoration:none;"%> </a>
+            <%#= link_to "Login",new_user_session_path,class: "signup-image-link"%>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sing in  Form -->
+
+
+  </div>
+<%end %>
