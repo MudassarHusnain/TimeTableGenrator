@@ -33,7 +33,7 @@
       </div>
 
       <div class="signin-form">
-        <h2 class="form-title">Sign up</h2>
+        <h2 class="form-title">Sign In</h2>
         <form method="POST" class="register-form" id="login-form">
           <div class="form-group">
             <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
@@ -42,7 +42,7 @@
           </div>
           <div class="form-group">
             <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-            <%= f.password_field :password, autocomplete: "current-password" %>
+            <%= f.password_field :password, autocomplete: "current-password",placeholder: "Password" %>
           </div>
           <div class="form-group">
             <%= f.check_box :remember_me ,class: "agree-term"%>

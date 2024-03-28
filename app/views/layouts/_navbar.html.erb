@@ -1,0 +1,30 @@
+  <% if user_signed_in? %>
+  <%= image_tag "timetable.png",class:"ms-4 round-2 mt-5", width: "20px",height: "20px",style: "position:absolute;transform: scale(10);margin-top:50px;        border-radius: 4px;" %>   
+
+<div class="ui secondary  menu mt-3" style="margin: 150px;">
+  <a class="active item">
+    Home
+  </a>
+  <a class="item">
+    Department
+  </a>
+  <a class="item">
+    Courses
+  </a>
+  <a class="item">
+  Teachers
+  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+    <a class="ui item">
+     
+<%= link_to 'Logout', destroy_user_session_path,data: { remote: :true,turbo_method: :delete } %>
+    </a>
+  </div>
+</div>
+<% end %>

@@ -207,7 +207,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    select2-rails (4.0.13)
     selenium-webdriver (4.18.1)
       base64 (~> 0.2)
       rexml (~> 3.2, >= 3.2.5)
@@ -266,7 +265,6 @@ DEPENDENCIES
   rails (~> 7.0.8, >= 7.0.8.1)
   redis (~> 4.0)
   sassc-rails
-  select2-rails
   selenium-webdriver
   semantic-ui-sass
   sprockets-rails
@@ -277,7 +275,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.1.2p20
+   ruby 3.1.4p223
 
 BUNDLED WITH
    2.3.25
