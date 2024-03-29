@@ -77,3 +77,5 @@ gem 'bootstrap', '~> 5.3.2'
 gem 'jquery-rails'
 gem 'sassc-rails'
 gem 'semantic-ui-sass'
+
+gem "select2-rails"

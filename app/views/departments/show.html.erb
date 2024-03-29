@@ -5,6 +5,6 @@
 <div>
   <%= link_to "Edit this department", edit_department_path(@department) %> |
   <%= link_to "Back to departments", departments_path %>
-
+  <%= link_to "Add Course",new_department_course_path(@department) %>
   <%= button_to "Destroy this department", @department, method: :delete %>
 </div>
