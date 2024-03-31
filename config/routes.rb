@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :departments
-  resources :courses
-  resources :teachers
+  resources :departments do
+    resources :courses
+    resources :teachers
+  end
   devise_for :users
 
 

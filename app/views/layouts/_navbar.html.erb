@@ -1,30 +1,37 @@
-  <% if user_signed_in? %>
-  <%= image_tag "timetable.png",class:"ms-4 round-2 mt-5", width: "20px",height: "20px",style: "position:absolute;transform: scale(10);margin-top:50px;        border-radius: 4px;" %>   
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-lg-3 col-md-4 col-sm-12 p-0 sidebar">
+      <%= image_tag 'logo.png', alt: 'Logo', class: 'mt-3 rounded', style: 'width: 100%; height: 10%' %>
+      <ul class="nav flex-column">
+        <li class="nav-item mt-4">
+        <div class="ui selection dropdown bg-dark">
+          <i class="dropdown icon"></i>
+          <div class="default nav-link text fs-5 bg-dark ms-5">Departments</div>
+          <div class="menu scrolling bg-dark">
+            <% Department.all.each do |department| %>
+                <div class="item" data-value="<%= department.id %>"><%= link_to department.name.capitalize, department_path(department) %></div>
+            <% end %>
+          </div>
+        </div>
+      </li>
 
-<div class="ui secondary  menu mt-3" style="margin: 150px;">
-  <a class="active item">
-    Home
-  </a>
-  <a class="item">
-    Department
-  </a>
-  <a class="item">
-    Courses
-  </a>
-  <a class="item">
-  Teachers
-  </a>
-  <div class="right menu">
-    <div class="item">
-      <div class="ui icon input">
-        <input type="text" placeholder="Search...">
-        <i class="search link icon"></i>
-      </div>
+        <li class="nav-item">
+          <a class="nav-link" href="/teachers">Teachers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Settings</a>
+        </li>
+      </ul>
+      <a href="#" class="logout-link">Logout</a>
     </div>
-    <a class="ui item">
-     
-<%= link_to 'Logout', destroy_user_session_path,data: { remote: :true,turbo_method: :delete } %>
-    </a>
+    <!-- End Sidebar -->
+    
+    <!-- Main Content -->
+    <div class="col-lg-9 col-md-8 col-sm-12 main-content">
+      <%= yield %>
+    </div>
+    <!-- End Main Content -->
+    
   </div>
 </div>
-<% end %>

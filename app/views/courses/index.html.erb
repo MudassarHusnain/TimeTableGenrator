@@ -6,9 +6,9 @@
   <% @courses.each do |course| %>
     <%= render course %>
     <p>
-      <%= link_to "Show this course", course %>
+      <%= link_to "Show this course", department_course_path(course.department_id,course) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New course", new_course_path %>
+<%= link_to "New course", new_department_course_path %>

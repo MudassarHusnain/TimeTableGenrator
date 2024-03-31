@@ -6,7 +6,7 @@ import "semantic-ui"
 //= require jquery
 //= require popper
 //= require bootstrap
-
+//= require select2_locale_"any possible language"
 $(document).on('turbo:load', function() {
     console.log('loaded turbo links')
     $('.ui.selection.dropdown').dropdown({
@@ -15,4 +15,10 @@ $(document).on('turbo:load', function() {
         }
     });
 });
+
+$(document).ready(function() {
+    $('.ui.search.selection.dropdown').dropdown();
+});
+
+// JavaScript to handle department selectio
 

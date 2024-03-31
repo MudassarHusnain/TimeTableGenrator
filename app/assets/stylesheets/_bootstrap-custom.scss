@@ -711,3 +711,64 @@ body {
 .ui.selection.dropdown .menu {
   min-width: 200px;
 }
+body {
+  background-color: #f8f9fa; /* Background color of the page */
+}
+.sidebar {
+  background-color: #343a40; /* Dark background color */
+  color: #fff; /* Text color */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow-y: auto;
+  padding-top: 20px;
+  width: 250px; /* Initial width of the sidebar */
+}
+.sidebar img {
+  display: block;
+  margin: 0 auto;
+  max-width: 80%; /* Maximum width of the logo */
+  height: auto; /* Maintain aspect ratio */
+  margin-bottom: 20px;
+}
+.sidebar .nav-link {
+  background-color: #343a40; /* Dark background color for sidebar items */
+  color: #ced4da; /* Text color for links */
+  font-weight: 500; /* Font weight for links */
+  border: none;
+}
+.sidebar .nav-link.active {
+  font-weight: bold; /* Active link font weight */
+  color: #fff; /* Text color for active link */
+}
+.sidebar .nav-link:hover {
+  background-color: #454d55; /* Darker background color on hover */
+  color: #fff; /* White text color on hover */
+}
+.sidebar .logout-link {
+  color: #ced4da; /* Text color for logout link */
+  font-weight: 500; /* Font weight for logout link */
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+.sidebar .logout-link:hover {
+  color: #fff; /* White text color on hover */
+}
+/* Main content padding to avoid overlap with fixed sidebar */
+.main-content {
+  padding-left: 250px; /* Adjust based on sidebar width */
+}
+/* Responsive sidebar */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 100%; /* Full width on small screens */
+    position: static; /* Static position on small screens */
+    height: auto; /* Auto height on small screens */
+  }
+  .main-content {
+    padding-left: 0; /* No padding on small screens */
+  }
+}

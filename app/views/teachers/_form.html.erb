@@ -1,4 +1,5 @@
-<%= form_with(model: teacher) do |form| %>
+<%= form_with(model: [department,teacher],url: department_teachers_path(department)) do |form| %>
+
   <% if teacher.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
@@ -11,7 +12,7 @@
     </div>
   <% end %>
 
-  <section class="">
+  <section class="ms-5 ps-5">
     <div class="container">
       <div class="signup-content">
         <div class="signup-form">
@@ -42,7 +43,7 @@
             </div>
           </form>
           <div>
-            <%= link_to "Back to Teachers", teachers_path %>
+            <%= link_to "Back to Teachers", department_teachers_path %>
           </div>
         </div>
       </div>

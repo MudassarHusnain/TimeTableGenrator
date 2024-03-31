@@ -6,9 +6,9 @@
   <% @teachers.each do |teacher| %>
     <%= render teacher %>
     <p>
-      <%= link_to "Show this teacher", teacher %>
+      <%= link_to "Show this teacher", department_course_path(teacher.department_id,teacher) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New teacher", new_teacher_path %>
+<%= link_to "New teacher", new_department_teacher_path %>
