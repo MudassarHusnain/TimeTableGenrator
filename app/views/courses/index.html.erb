@@ -1,14 +1,45 @@
-<p style="color: green"><%= notice %></p>
+<%@department = Department.find_by(id: params[:department_id].to_i)%>
+<div class="container">
+  <div class="row justify-content-center mt-4">
+    <div class="col-auto">
+      <%= link_to "Teachers",department_teachers_path(params[:department_id]), class: "btn btn-primary" %>
+    </div>
+    <div class="col-auto">
+      <%= link_to "Courses", department_courses_path(params[:department_id]), class: "btn btn-primary" %>
+    </div>
+  </div>
 
-<h1>Courses</h1>
+  <h2 class="mt-4">Teachers Information</h2>
+  <%= link_to "Add Course",new_department_course_path(params[:department_id]),class: "btn btn-primary" %>
 
-<div id="courses">
-  <% @courses.each do |course| %>
-    <%= render course %>
-    <p>
-      <%= link_to "Show this course", department_course_path(course.department_id,course) %>
-    </p>
-  <% end %>
+  <table class="table mt-4">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Course Name</th>
+      <th scope="col">Department</th>
+      <th scope="col">Teachers</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @department.courses.all.each.with_index(1) do |course, index| %>
+      <tr>
+        <th scope="row"><%= index %></th>
+        <td><%= course.courseName %></td>
+        <td><%= course.department.name %></td>
+        <td>
+          <div class="ui selection dropdown">
+            <i class="dropdown icon"></i>
+            <div class="default text fs-5 ms-5">Teachers</div>
+            <div class="menu scrolling">
+              <% course.teachers.each do |teacher| %>
+                <div class="item" data-value="<%= teacher.id %>"><%= teacher.name.capitalize%></div>
+              <% end %>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New course", new_department_course_path %>

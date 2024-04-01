@@ -1,14 +1,47 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center">
+    <h2 class="mt-4">Departments Information</h2>
+    <%= link_to "Add Department", new_department_path, class: "btn btn-primary me-1" %>
+  </div>
 
-<h1>Departments</h1>
-
-<div id="departments">
-  <% @departments.each do |department| %>
-    <%= render department %>
-    <p>
-      <%= link_to "Show this department", department %>
-    </p>
-  <% end %>
+  <table class="table mt-4">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Department Name</th>
+      <th scope="col">Teachers</th>
+      <th scope="col">Courses</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @departments.each.with_index(1) do |department, index| %>
+      <tr>
+        <th scope="row"><%= index %></th>
+        <td><%= department.name %></td>
+        <td>
+          <div class="ui selection dropdown">
+            <i class="dropdown icon"></i>
+            <div class="default text fs-5 ms-5">Teachers</div>
+            <div class="menu scrolling">
+              <% department.teachers.each do |teacher| %>
+                <div class="item" data-value="<%= teacher.id %>"><%= teacher.name.capitalize%></div>
+              <% end %>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="ui selection dropdown">
+            <i class="dropdown icon"></i>
+            <div class="default text fs-5 ms-5">Courses</div>
+            <div class="menu scrolling">
+              <% department.courses.each do |course| %>
+                <div class="item" data-value="<%= course.id %>"><%= course.courseName.capitalize%></div>
+              <% end %>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New department", new_department_path %>

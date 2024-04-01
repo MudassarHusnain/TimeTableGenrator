@@ -1,8 +1,10 @@
 class CoursesController < ApplicationController
   before_action :set_course,:set_department, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /courses or /courses.json
   def index
+    @department = Department.find_by(id: params[:department_id])
     @courses = Course.all
   end
 
