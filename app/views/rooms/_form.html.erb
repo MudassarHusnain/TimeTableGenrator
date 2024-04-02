@@ -1,0 +1,42 @@
+<%= form_with(model: [department,room],url: department_rooms_url(department)) do |form| %>
+
+    <% if room.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+        <% room.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <section class="ms-5 ps-5">
+    <div class="container">
+      <div class="signup-content">
+        <div class="signup-form">
+          <h2 class="form-title">Create New Room</h2>
+          <form method="POST" class="register-form" id="register-form">
+            <div class="form-group">
+              <label for="name"><i class="zmdi zmdi-account material-icons-name fs-5"></i></label>
+              <div class="form-group">
+                <%#= form.label :courseName, style: "display: block" %>
+                <%= form.text_field :name,placeholder: "Room Name",class: "fs-5"%>
+              </div>
+              <div class="form-group form-button">
+                <%= form.submit "Create Room",class: "form-submit fs-5" %>
+              </div>
+
+
+            </div>
+          </form>
+          <div>
+            <%= link_to "Back to Rooms", department_rooms_path %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+<% end %>

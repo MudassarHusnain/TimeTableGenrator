@@ -14,7 +14,7 @@ class TeachersController < ApplicationController
 
   # GET /teachers/new
   def new
-    @department = Department.find_by(params[:department_id])
+    @department = Department.find_by(id: params[:department_id])
     @teacher = Teacher.new
   end
 
@@ -24,7 +24,7 @@ class TeachersController < ApplicationController
 
   # POST /teachers or /teachers.json
   def create
-    @department = Department.find_by(params[:department_id])
+    @department = Department.find_by(id: params[:department_id])
     @teacher = Teacher.new(teacher_params)
     respond_to do |format|
       if @teacher.save

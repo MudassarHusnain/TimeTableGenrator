@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_26_112625) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_02_044242) do
   create_table "courses", force: :cascade do |t|
     t.string "courseName"
     t.integer "department_id", null: false
@@ -19,10 +19,29 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_26_112625) do
     t.index ["department_id"], name: "index_courses_on_department_id"
   end
 
+  create_table "dep_classes", force: :cascade do |t|
+    t.string "name"
+    t.integer "room_id", null: false
+    t.integer "department_id", null: false
+    t.integer "strength"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_dep_classes_on_department_id"
+    t.index ["room_id"], name: "index_dep_classes_on_room_id"
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.integer "department_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_rooms_on_department_id"
   end
 
   create_table "teacher_courses", force: :cascade do |t|
@@ -57,6 +76,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_26_112625) do
   end
 
   add_foreign_key "courses", "departments"
+  add_foreign_key "dep_classes", "departments"
+  add_foreign_key "dep_classes", "rooms"
+  add_foreign_key "rooms", "departments"
   add_foreign_key "teacher_courses", "courses"
   add_foreign_key "teacher_courses", "teachers"
   add_foreign_key "teachers", "departments"

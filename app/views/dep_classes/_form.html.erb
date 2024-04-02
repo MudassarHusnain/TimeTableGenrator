@@ -1,0 +1,51 @@
+<%= form_with(model: [department,dep_class],url: department_dep_classes_path(department)) do |form| %>
+    <% if dep_class.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(dep_class.errors.count, "error") %> prohibited this dep_class from being saved:</h2>
+
+      <ul>
+        <% dep_class.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <section class="ms-5 ps-3">
+    <div class="container">
+      <div class="signup-content">
+        <div class="signup-form">
+          <h2 class="form-title">Create New Class</h2>
+          <form method="POST" class="register-form" id="register-form">
+            <div class="form-group">
+              <label for="name"><i class="zmdi zmdi-account material-icons-name fs-5"></i></label>
+              <div class="form-group">
+                <%#= form.label :courseName, style: "display: block" %>
+                <%= form.text_field :name,placeholder: "Class Name",class: "fs-5"%>
+              </div>
+
+
+              <div class="mt-4 ui selection dropdown">
+                <%= form.hidden_field :room_id %>
+                <i class="dropdown icon"></i>
+                <div class="default text fs-5">Rooms</div>
+                <div class="menu scrolling">
+                  <%= form.select :room_id,department.rooms.all.map { |room| [room.name.capitalize, room.id] },
+                                  {}, class: "ui item selection dropdown" %>
+                </div>
+              </div>
+
+              <div class="form-group form-button">
+                <%= form.submit "Create Class",class: "form-submit fs-5" %>
+              </div>
+            </div>
+          </form>
+          <div>
+            <%= link_to "Back to Classes", department_dep_classes_path %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+<% end %>
