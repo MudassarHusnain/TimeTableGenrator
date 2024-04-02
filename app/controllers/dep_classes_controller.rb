@@ -3,6 +3,7 @@ class DepClassesController < ApplicationController
 
   # GET /dep_classes or /dep_classes.json
   def index
+    @department = Department.find_by(id: params[:department_id])
     @dep_classes = DepClass.all
   end
 
