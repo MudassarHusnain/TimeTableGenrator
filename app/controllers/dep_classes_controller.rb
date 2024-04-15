@@ -16,7 +16,6 @@ class DepClassesController < ApplicationController
   def new
     @department = Department.find_by(id: params[:department_id])
     @available_rooms = @department.rooms.left_outer_joins(:dep_classes).where(dep_classes: { room_id: nil })
-    debugger
     @dep_class = @department.dep_classes.new
   end
 

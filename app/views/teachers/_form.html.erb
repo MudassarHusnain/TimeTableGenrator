@@ -25,16 +25,6 @@
                 <%= form.text_field :name,placeholder: "Teacher Name",class: "fs-5"%>
               </div>
 
-              <div class="ui selection dropdown">
-                <%= form.hidden_field :department_id %>
-                <i class="dropdown icon"></i>
-                <div class="default text fs-5">Departments</div>
-                <div class="menu scrolling">
-                  <%= form.select :department_id,Department.all.map { |department| [department.name.capitalize, department.id] },
-                                  {}, class: "ui item selection dropdown" %>
-                </div>
-              </div>
-
               <div class="form-group form-button">
                 <%= form.submit "Create Teacher",class: "form-submit fs-5" %>
               </div>

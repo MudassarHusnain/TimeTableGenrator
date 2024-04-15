@@ -15,7 +15,7 @@ class TeachersController < ApplicationController
   # GET /teachers/new
   def new
     @department = Department.find_by(id: params[:department_id])
-    @teacher = Teacher.new
+    @teacher = @department.teachers.new
   end
 
   # GET /teachers/1/edit
@@ -25,7 +25,7 @@ class TeachersController < ApplicationController
   # POST /teachers or /teachers.json
   def create
     @department = Department.find_by(id: params[:department_id])
-    @teacher = Teacher.new(teacher_params)
+    @teacher = @department.teachers.new(teacher_params)
     respond_to do |format|
       if @teacher.save
         format.html { redirect_to department_teacher_url(@department,@teacher), notice: "Teacher was successfully created." }

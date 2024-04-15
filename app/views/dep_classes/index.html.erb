@@ -67,7 +67,8 @@
             <div class="default text fs-5 ms-5">Courses</div>
             <div class="menu scrolling">
               <% depclass.class_course_slots.each do |schdule| %>
-                <div class="item" data-value="<%= schdule.id %>"><%= schdule.teacher_course.course.courseName.capitalize%></div>
+                <div class="item" data-value="<%= schdule.id %>"><%= "#{schdule.teacher_course.course.courseName.capitalize} by ( #{schdule.teacher_course.teacher.name.capitalize})"%> 
+                <%= link_to "delete",department_dep_class_class_course_slot_path(@department,depclass,schdule),data: {turbo_method: :delete,turbo_confirm: "Are you sure to want to delete"}%></div>
               <% end %>
             </div>
           </div>

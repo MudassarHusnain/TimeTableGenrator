@@ -18,6 +18,10 @@ class ClassCourseSlotsController < ApplicationController
   def new
     @department = Department.find_by(id: params[:department_id])
     @class = DepClass.find_by(id: params[:dep_class_id])
+    debugger
+
+    @available_slots = @department.slots.left_outer_joins(:class_course_slots).where(class_course_slots: {slot_id: nil})
+
     @class_course_slot = @class.class_course_slots.new
   end
 
@@ -29,8 +33,6 @@ class ClassCourseSlotsController < ApplicationController
 
   # POST /class_course_slots or /class_course_slots.json
   def create
-    @course = Course.find_by(id: class_course_slot_params[:teacher_course_id]) 
-    debugger
     @department = Department.find_by(id: params[:department_id])
     @class = DepClass.find_by(id: params[:dep_class_id])
     @class_course_slot = @class.class_course_slots.new(class_course_slot_params)
@@ -64,11 +66,12 @@ class ClassCourseSlotsController < ApplicationController
   # DELETE /class_course_slots/1 or /class_course_slots/1.json
   def destroy
     @department = Department.find_by(id: params[:department_id])
+    debugger
     @class = DepClass.find_by(id: params[:dep_class_id])
     @class_course_slot.destroy
 
     respond_to do |format|
-      format.html { redirect_to department_dep_class_class_course_slots_url(@department,@dep_class), notice: "Class course slot was successfully destroyed." }
+      format.html { redirect_to department_dep_class_class_course_slots_url(@department,@class), notice: "Class course slot was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -81,6 +84,6 @@ class ClassCourseSlotsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def class_course_slot_params
-      params.require(:class_course_slot).permit(:dep_class_id, :teacher_course_id, :slot_id,:teacher_id)
+      params.require(:class_course_slot).permit(:dep_class_id, :teacher_course_id, :slot_id)
     end
 end
