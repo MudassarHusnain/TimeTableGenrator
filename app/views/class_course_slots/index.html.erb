@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Class course slots</h1>
+
+<div id="class_course_slots">
+  <% @class_course_slots.each do |class_course_slot| %>
+    <%= render class_course_slot %>
+    <p>
+      <%= link_to "Show this class course slot", department_dep_class_class_course_slot_path(@department,@class,class_course_slot) %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New class course slot", new_department_dep_class_class_course_slot_path(@department,@class) %>

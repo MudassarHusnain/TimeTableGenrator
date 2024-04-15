@@ -9,11 +9,14 @@ class DepClassesController < ApplicationController
 
   # GET /dep_classes/1 or /dep_classes/1.json
   def show
+    @department = Department.find_by(id: params[:department_id])
   end
 
   # GET /dep_classes/new
   def new
     @department = Department.find_by(id: params[:department_id])
+    @available_rooms = @department.rooms.left_outer_joins(:dep_classes).where(dep_classes: { room_id: nil })
+    debugger
     @dep_class = @department.dep_classes.new
   end
 

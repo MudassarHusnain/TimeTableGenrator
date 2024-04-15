@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_02_044242) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_13_181905) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "class_course_slots", force: :cascade do |t|
+    t.bigint "dep_class_id", null: false
+    t.bigint "slot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "teacher_course_id"
+    t.index ["dep_class_id"], name: "index_class_course_slots_on_dep_class_id"
+    t.index ["slot_id"], name: "index_class_course_slots_on_slot_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "courseName"
     t.integer "department_id", null: false
@@ -44,6 +57,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_044242) do
     t.index ["department_id"], name: "index_rooms_on_department_id"
   end
 
+  create_table "slots", force: :cascade do |t|
+    t.time "start_time"
+    t.time "end_time"
+    t.bigint "department_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_slots_on_department_id"
+  end
+
   create_table "teacher_courses", force: :cascade do |t|
     t.integer "course_id", null: false
     t.integer "teacher_id", null: false
@@ -75,10 +97,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_044242) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "class_course_slots", "dep_classes"
+  add_foreign_key "class_course_slots", "slots"
   add_foreign_key "courses", "departments"
   add_foreign_key "dep_classes", "departments"
   add_foreign_key "dep_classes", "rooms"
   add_foreign_key "rooms", "departments"
+  add_foreign_key "slots", "departments"
   add_foreign_key "teacher_courses", "courses"
   add_foreign_key "teacher_courses", "teachers"
   add_foreign_key "teachers", "departments"

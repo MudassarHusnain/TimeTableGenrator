@@ -3,9 +3,11 @@ Rails.application.routes.draw do
     resources :courses
     resources :teachers
     resources :rooms
-    resources :dep_classes
-
-
+    resources :dep_classes do
+      resources :class_course_slots
+    end
+    resources :slots
+  
   end
   devise_for :users
 

@@ -9,10 +9,17 @@
     <div class="col-auto">
       <%= link_to "Rooms", department_rooms_path(params[:department_id]), class: "btn btn-primary" %>
     </div>
+    <div class="col-auto">
+      <%= link_to "Class", department_dep_classes_path(@department), class: "btn btn-primary" %>
+    </div>
+    <div class="col-auto">
+      <%= link_to "Slots", department_slots_path(@department), class: "btn btn-primary" %>
+    </div>
+    
   </div>
 
   <h2 class="mt-4">Teachers Information</h2>
-  <%= link_to "Add Teacher",new_department_teacher_path(params[:department_id]),class: "btn btn-primary" %>
+  <%= link_to "Add Teacher",new_department_slot_path(params[:department_id]),class: "btn btn-primary" %>
   <table class="table mt-4">
     <thead>
     <tr>

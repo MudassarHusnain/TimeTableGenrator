@@ -8,10 +8,10 @@
         <li class="nav-item mt-4">
           <div class="ui selection dropdown ">
             <i class="dropdown icon"></i>
-            <div class="default  text fs-5 ms-5">Departments</div>
+            <div class="default text-dark  text fs-5 ms-5">Departments</div>
             <div class="menu scrolling">
               <% Department.all.each do |department| %>
-                <div class="item" data-value="<%= department.id %>"><%= link_to department.name.capitalize, department_path(department),class: "text-dark" %></div>
+                <%= link_to department.name.capitalize, department_path(department),class: "text-dark item" %>
               <% end %>
             </div>
           </div>

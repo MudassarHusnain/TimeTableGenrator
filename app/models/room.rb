@@ -1,4 +1,4 @@
 class Room < ApplicationRecord
   belongs_to :department
-  has_one :dep_classes
+  has_many :dep_classes
 end

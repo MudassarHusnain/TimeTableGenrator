@@ -30,8 +30,8 @@
                 <i class="dropdown icon"></i>
                 <div class="default text fs-5">Rooms</div>
                 <div class="menu scrolling">
-                  <%= form.select :room_id,department.rooms.all.map { |room| [room.name.capitalize, room.id] },
-                                  {}, class: "ui item selection dropdown" %>
+                  <%= form.select :room_id, @available_rooms.map { |room| [room.name.capitalize, room.id] }, {}, class: "ui item selection dropdown" %>
+
                 </div>
               </div>
 

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @class_course_slot %>
+
+<div>
+  <%= link_to "Edit this class course slot", edit_department_dep_class_class_course_slot_path(@department,@class,@class_course_slot) %> |
+  <%= link_to "Back to class course slots", department_dep_class_class_course_slots_path(@department,@class) %>
+
+  <%# <%= button_to "Destroy this class course slot", @class_course_slot, method: :delete %> %>
+</div>

@@ -1,4 +1,6 @@
-<p style="color: green"><%= notice %></p>
+<%
+=begin%>
+ <p style="color: green"><%= notice %></p>
 
 <h1>Dep classes</h1>
 
@@ -9,9 +11,15 @@
       <%= link_to "Show this dep class", department_dep_class_path(dep_class.department_id,dep_class) %>
     </p>
   <% end %>
-</div>
+</div> 
+<%
+=end%>
 
-<%= link_to "New dep class", new_department_dep_class_path(params[:department_id]) %>
+<%
+=begin%>
+ <%= link_to "New dep class", new_department_dep_class_path(params[:department_id]) %> 
+<%
+=end%>
 <div class="container" style="margin-top: 20%;margin-left: 20%;width: 100%">
   <div class="row justify-content-center mt-4">
     <div class="col-auto">
@@ -23,10 +31,17 @@
     <div class="col-auto">
       <%= link_to "Rooms", department_rooms_path(params[:department_id]), class: "btn btn-primary" %>
     </div>
+    <div class="col-auto">
+      <%= link_to "Class", department_dep_classes_path(@department), class: "btn btn-primary" %>
+    </div>
+    <div class="col-auto">
+      <%= link_to "Slots", department_slots_path(@department), class: "btn btn-primary" %>
+    </div>
+    
   </div>
 
   <h2 class="mt-4">Classes Information</h2>
-  <%= link_to "Add Course",new_department_dep_class_path(params[:department_id]),class: "btn btn-primary" %>
+  <%= link_to "Add Class",new_department_dep_class_path(params[:department_id]),class: "btn btn-primary" %>
 
   <table class="table mt-4">
     <thead>
@@ -41,10 +56,24 @@
     <% @department.dep_classes.all.each.with_index(1) do |depclass, index| %>
       <tr>
         <th scope="row"><%= index %></th>
-        <td><%= depclass.courseName %></td>
+        <td><%= depclass.name %></td>
         <td><%= depclass.department.name %></td>
         <td>
           <%= depclass.strength %>
+        </td>
+        <td>
+          <div class="ui selection dropdown">
+            <i class="dropdown icon"></i>
+            <div class="default text fs-5 ms-5">Courses</div>
+            <div class="menu scrolling">
+              <% depclass.class_course_slots.each do |schdule| %>
+                <div class="item" data-value="<%= schdule.id %>"><%= schdule.teacher_course.course.courseName.capitalize%></div>
+              <% end %>
+            </div>
+          </div>
+          </td>
+        <td>
+          <%=link_to "Add Courses", new_department_dep_class_class_course_slot_path(@department,depclass) %>
         </td>
       </tr>
     <% end %>

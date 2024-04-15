@@ -1,10 +1,10 @@
-<!--<p style="color: green"><%#= notice %></p>-->
+<p style="color: green"><% notice %></p>
 
-<%#= render @dep_class %>
+<%= render @dep_class %>
 
-<!--<div>-->
-<!--  <%#= link_to "Edit this dep class", edit_dep_class_path(@dep_class) %> |-->
-  <%#= link_to "Back to dep classes", dep_classes_path %>
+<div>
+  <%= link_to "Edit this dep class", edit_department_dep_class_path(@department,@dep_class) %> 
+  <%= link_to "Back to dep classes", department_dep_classes_path(@department) %>
 
-  <%#= button_to "Destroy this dep class", @dep_class, method: :delete %>
-<!--</div>-->
+  <%= button_to "Destroy this dep class", department_dep_class_path(@department,@dep_class), method: :delete %>
+</div>

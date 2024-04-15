@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dep_class: one
+  teacher_course: one
+  slot: one
+  room: one
+
+two:
+  dep_class: two
+  teacher_course: two
+  slot: two
+  room: two
