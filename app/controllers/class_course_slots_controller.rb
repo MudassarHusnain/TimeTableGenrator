@@ -18,9 +18,7 @@ class ClassCourseSlotsController < ApplicationController
   def new
     @department = Department.find_by(id: params[:department_id])
     @class = DepClass.find_by(id: params[:dep_class_id])
-    debugger
 
-    @available_slots = @department.slots.left_outer_joins(:class_course_slots).where(class_course_slots: {slot_id: nil})
 
     @class_course_slot = @class.class_course_slots.new
   end
@@ -35,6 +33,7 @@ class ClassCourseSlotsController < ApplicationController
   def create
     @department = Department.find_by(id: params[:department_id])
     @class = DepClass.find_by(id: params[:dep_class_id])
+    debugger
     @class_course_slot = @class.class_course_slots.new(class_course_slot_params)
 
     respond_to do |format|
@@ -84,6 +83,6 @@ class ClassCourseSlotsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def class_course_slot_params
-      params.require(:class_course_slot).permit(:dep_class_id, :teacher_course_id, :slot_id)
+      params.require(:class_course_slot).permit(:dep_class_id, :teacher_course_id, :slot_id,:days)
     end
 end

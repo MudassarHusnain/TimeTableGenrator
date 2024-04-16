@@ -34,7 +34,15 @@
                     </div>
                   </div>
                 </div>
-                 
+            <div class="ui selection dropdown">
+              <%= form.hidden_field :days %>
+              <i class="dropdown icon"></i>
+              <div class="default text">Select Day</div>
+              <div class="menu scrolling">
+                <%= form.select :days, ClassCourseSlot.days.map { |role,value| [role.capitalize, role] }, {}, class: "ui item selection dropdown" %>
+              </div>
+            </div>
+
               <%= form.hidden_field :slot_id, value: 1 %>
 
               <div class="form-group form-button">
@@ -53,15 +61,3 @@
   </section>
 <% end %>
 
-<script>
-  // JavaScript to update the selected teacher_course_id value
-  document.addEventListener("DOMContentLoaded", function() {
-    var dropdown = document.getElementById("teacher-course-dropdown");
-    var selectedCourseIdDisplay = document.getElementById("selected-course-id");
-
-    dropdown.addEventListener("change", function() {
-      var selectedCourseId = dropdown.value;
-      selectedCourseIdDisplay.textContent = "Selected Course ID: " + selectedCourseId;
-    });
-  });
-</script>
