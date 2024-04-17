@@ -24,16 +24,18 @@
                 <%= form.text_field :name,placeholder: "Class Name",class: "fs-5"%>
               </div>
 
-
               <div class="mt-4 ui selection dropdown">
-                <%= form.hidden_field :room_id %>
+                <%= form.hidden_field :class_type %>
                 <i class="dropdown icon"></i>
-                <div class="default text fs-5">Rooms</div>
+                <div class="default text fs-5">Class Type</div>
                 <div class="menu scrolling">
-                  <%= form.select :room_id, @available_rooms.map { |room| [room.name.capitalize, room.id] }, {}, class: "ui item selection dropdown" %>
+                  <%= form.select :class_type, DepClass.class_types.map { |type,value| [type.capitalize,type ] }, {}, class: "ui item selection dropdown" %>
 
                 </div>
               </div>
+
+                <%= form.hidden_field :room_id,value: 1 %>
+
 
               <div class="form-group form-button">
                 <%= form.submit "Create Class",class: "form-submit fs-5" %>

@@ -10,12 +10,12 @@ class DepClassesController < ApplicationController
   # GET /dep_classes/1 or /dep_classes/1.json
   def show
     @department = Department.find_by(id: params[:department_id])
+    @dep_class = DepClass.find_by(id: params[:id])
   end
 
   # GET /dep_classes/new
   def new
     @department = Department.find_by(id: params[:department_id])
-    @available_rooms = @department.rooms.left_outer_joins(:dep_classes).where(dep_classes: { room_id: nil })
     @dep_class = @department.dep_classes.new
   end
 
@@ -26,15 +26,26 @@ class DepClassesController < ApplicationController
   # POST /dep_classes or /dep_classes.json
   def create
     @department = Department.find_by(id: params[:department_id])
-    @dep_class = @department.dep_classes.new(dep_class_params)
+    @afternoon_classes = @department.dep_classes.where(class_type: dep_class_params[:class_type])
+    @afternoon_available_rooms = @department.rooms.left_outer_joins(:dep_classes).where.not(id: @afternoon_classes.pluck(:room_id))
 
-    respond_to do |format|
-      if @dep_class.save
-        format.html { redirect_to department_dep_class_url(@department,@dep_class), notice: "Dep class was successfully created." }
-        format.json { render :show, status: :created, location: @dep_class }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @dep_class.errors, status: :unprocessable_entity }
+    if @afternoon_available_rooms.empty?
+      flash[:notice] = "No rooms available for afternoon classes."
+      redirect_to new_department_dep_class_path(@department) # Redirect to the new action
+    else
+      dep_class_params[:room_id] = @afternoon_available_rooms.uniq.first.id
+      debugger
+      @dep_class = @department.dep_classes.new(dep_class_params)
+      @dep_class.room_id = @afternoon_available_rooms.first.id
+
+      respond_to do |format|
+        if @dep_class.save
+          format.html { redirect_to department_dep_class_url(@department, @dep_class), notice: "Dep class was successfully created." }
+          format.json { render :show, status: :created, location: @dep_class }
+        else
+          format.html { render :new, status: :unprocessable_entity, notice: "Class not Created Due to Room is not available." }
+          format.json { render json: @dep_class.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -70,6 +81,6 @@ class DepClassesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dep_class_params
-      params.require(:dep_class).permit(:name, :room_id, :department_id, :strength)
+      params.require(:dep_class).permit(:name, :room_id, :department_id,:class_type, :strength)
     end
 end

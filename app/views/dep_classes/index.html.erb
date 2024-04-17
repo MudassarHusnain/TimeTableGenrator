@@ -35,7 +35,7 @@
     <% @department.dep_classes.all.each.with_index(1) do |depclass, index| %>
       <tr>
         <th scope="row"><%= index %></th>
-        <td><%= depclass.name %></td>
+        <td><%= link_to depclass.name,department_dep_class_path(@department,depclass) %></td>
         <td><%= depclass.department.name %></td>
         <td>
           <%= depclass.strength %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_16_133123) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_17_062452) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_16_133123) do
     t.integer "strength"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "class_type"
     t.index ["department_id"], name: "index_dep_classes_on_department_id"
     t.index ["room_id"], name: "index_dep_classes_on_room_id"
   end
