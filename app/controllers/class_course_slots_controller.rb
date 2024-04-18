@@ -39,11 +39,8 @@ class ClassCourseSlotsController < ApplicationController
     @teacher = @teacher_course.teacher
 
     #   this block of code is uses to get all the teacher slot for day1 and day2 he will teach and these are not assign to other class for that make clashes
-    # @teacher_reserved_slots = ClassCourseSlot.where(teacher_course_id: @teacher.teacher_courses)
     @teacher_reserved_slots_day1=ClassCourseSlot.get_the_teacher_used_slots(@teacher,'day1')
     @teacher_reserved_slots_day2=ClassCourseSlot.get_the_teacher_used_slots(@teacher,'day2')
-    # @teacher_reserved_slots.where(days: "day1").each do |slot| @teacher_reserved_slots_day1 << slot.slot_id end
-    # @teacher_reserved_slots.where(days: "day2").each do |slot| @teacher_reserved_slots_day2 << slot.slot_id end
 
     #   this block of code is used for not making duplication of course in one class
 
@@ -54,12 +51,7 @@ class ClassCourseSlotsController < ApplicationController
       #   this block of code is use for selecting all the slots that a class have already used for day1 and day2
       @class_used_slots_day1 = ClassCourseSlot.get_class_course_slots(@class,'day1')
       @class_used_slots_day2 = ClassCourseSlot.get_class_course_slots(@class,'day2')
-      # @class_course_slots_day1 = @class.class_course_slots.where(days: "day1")
-      # @class_course_slots_day2 = @class.class_course_slots.where(days: "day2")
-      # @class_course_slots_day1.each do |class_course_slot| @class_used_slots_day1 << class_course_slot.slot_id end
-      # @class_course_slots_day2.each do |class_course_slot| @class_used_slots_day2 << class_course_slot.slot_id end
-      # @class_used_slots_day2 = @class_used_slots_day2.uniq
-      # @class_used_slots_day1 = @class_used_slots_day1.uniq
+
 
       #   this is the total slots that we cannot be able to use it in the select combination of teacher and course
       @used_slots_day1 = (@class_used_slots_day1+ @teacher_reserved_slots_day1).uniq
