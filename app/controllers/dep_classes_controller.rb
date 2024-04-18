@@ -1,5 +1,6 @@
 class DepClassesController < ApplicationController
   before_action :set_dep_class, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /dep_classes or /dep_classes.json
   def index

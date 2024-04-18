@@ -1,5 +1,6 @@
 class ClassCourseSlotsController < ApplicationController
   before_action :set_class_course_slot, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /class_course_slots or /class_course_slots.json
   def index
@@ -35,11 +36,57 @@ class ClassCourseSlotsController < ApplicationController
     @class = DepClass.find_by(id: params[:dep_class_id])
     @teacher_course = TeacherCourse.find_by(id: class_course_slot_params[:teacher_course_id])
     @course = @teacher_course.course
+    @teacher = @teacher_course.teacher
+
+    #   this block of code is uses to get all the teacher slot for day1 and day2 he will teach and these are not assign to other class for that make clashes
+    # @teacher_reserved_slots = ClassCourseSlot.where(teacher_course_id: @teacher.teacher_courses)
+    @teacher_reserved_slots_day1=ClassCourseSlot.get_the_teacher_used_slots(@teacher,'day1')
+    @teacher_reserved_slots_day2=ClassCourseSlot.get_the_teacher_used_slots(@teacher,'day2')
+    # @teacher_reserved_slots.where(days: "day1").each do |slot| @teacher_reserved_slots_day1 << slot.slot_id end
+    # @teacher_reserved_slots.where(days: "day2").each do |slot| @teacher_reserved_slots_day2 << slot.slot_id end
+
+    #   this block of code is used for not making duplication of course in one class
+
     @teacher_courses=@course.teacher_courses
     @handle_duplication_of_course = @class.class_course_slots.where(teacher_course_id: @teacher_courses.pluck(:id))
     if @handle_duplication_of_course.empty?
-      debugger
-      @class_course_slot = @class.class_course_slots.new(class_course_slot_params)
+
+      #   this block of code is use for selecting all the slots that a class have already used for day1 and day2
+      @class_used_slots_day1 = ClassCourseSlot.get_class_course_slots(@class,'day1')
+      @class_used_slots_day2 = ClassCourseSlot.get_class_course_slots(@class,'day2')
+      # @class_course_slots_day1 = @class.class_course_slots.where(days: "day1")
+      # @class_course_slots_day2 = @class.class_course_slots.where(days: "day2")
+      # @class_course_slots_day1.each do |class_course_slot| @class_used_slots_day1 << class_course_slot.slot_id end
+      # @class_course_slots_day2.each do |class_course_slot| @class_used_slots_day2 << class_course_slot.slot_id end
+      # @class_used_slots_day2 = @class_used_slots_day2.uniq
+      # @class_used_slots_day1 = @class_used_slots_day1.uniq
+
+      #   this is the total slots that we cannot be able to use it in the select combination of teacher and course
+      @used_slots_day1 = (@class_used_slots_day1+ @teacher_reserved_slots_day1).uniq
+      @used_slots_day2 = (@class_used_slots_day2+ @teacher_reserved_slots_day2).uniq
+
+      #   all the slots for morning and afternoon class
+      @slots_for_morning = Slot.where("EXTRACT(HOUR FROM start_time) <= ?", 12)
+      @slots_for_afternoon= Slot.where("EXTRACT(HOUR FROM start_time) >= ?", 12)
+
+
+      #   available slots for morning class and after
+      @available_slots_day1= @slots_for_morning.ids - @used_slots_day1
+      @available_slots_day2 = @slots_for_morning.ids - @used_slots_day2
+
+      if !@available_slots_day1.empty?
+        @class_course_slot = @class.class_course_slots.new(class_course_slot_params)
+        @class_course_slot.slot_id = @available_slots_day1.first
+        @class_course_slot.days = "day1"
+      elsif !@available_slots_day2.empty?
+        @class_course_slot = @class.class_course_slots.new(class_course_slot_params)
+        @class_course_slot.slot_id = @available_slots_day2.first
+        @class_course_slot.days = "day2"
+      elsif @available_slots_day1.empty? && @available_slots_day2.empty?
+        flash[:notice] = "There are no available slots for this Teacher that you have selected"
+        redirect_to new_department_dep_class_class_course_slot_path(@department,@class) and return # Redirect to the new action
+      end
+
 
       respond_to do |format|
         if @class_course_slot.save
@@ -51,7 +98,6 @@ class ClassCourseSlotsController < ApplicationController
         end
       end
     else
-      debugger
       flash[:notice] = "Course Is already present."
       redirect_to new_department_dep_class_class_course_slot_path(@department,@class) # Redirect to the new action
       end
