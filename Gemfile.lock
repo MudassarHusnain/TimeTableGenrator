@@ -215,6 +215,8 @@ GEM
       websocket (~> 1.0)
     semantic-ui-sass (2.4.4.0)
       sassc
+    simple_calendar (3.0.4)
+      rails (>= 6.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -269,6 +271,7 @@ DEPENDENCIES
   sassc-rails
   selenium-webdriver
   semantic-ui-sass
+  simple_calendar (~> 3.0, >= 3.0.1)
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails

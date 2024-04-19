@@ -16,12 +16,7 @@
             </div>
           </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/teachers">Teachers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Settings</a>
-        </li>
+
       </ul>
       <%= link_to 'Logout', destroy_user_session_path, data: { remote: :true, turbo_method: :delete }, class: 'logout-link text-dark ms-5 btn btn-light btn-lg' %>
     </div>

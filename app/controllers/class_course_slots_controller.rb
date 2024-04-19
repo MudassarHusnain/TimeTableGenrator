@@ -61,11 +61,17 @@ class ClassCourseSlotsController < ApplicationController
       @slots_for_morning = Slot.where("EXTRACT(HOUR FROM start_time) <= ?", 12)
       @slots_for_afternoon= Slot.where("EXTRACT(HOUR FROM start_time) >= ?", 12)
 
-
+      @available_slots_day1
+      @available_slots_day2
+      debugger
       #   available slots for morning class and after
+      if @class.class_type == 'morning'
       @available_slots_day1= @slots_for_morning.ids - @used_slots_day1
       @available_slots_day2 = @slots_for_morning.ids - @used_slots_day2
-
+      else
+        @available_slots_day1= @slots_for_afternoon.ids - @used_slots_day1
+        @available_slots_day2 = @slots_for_afternoon.ids - @used_slots_day2
+      end
       if !@available_slots_day1.empty?
         @class_course_slot = @class.class_course_slots.new(class_course_slot_params)
         @class_course_slot.slot_id = @available_slots_day1.first

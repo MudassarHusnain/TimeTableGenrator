@@ -1,0 +1,6 @@
+# e.g. config/locales/de.yml
+de:
+  simple_calendar:
+    previous: "<<"
+    next: ">>"
+    week: Woche
