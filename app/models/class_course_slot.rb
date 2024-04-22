@@ -4,6 +4,7 @@ class ClassCourseSlot < ApplicationRecord
   belongs_to :slot
   
   validates :teacher_course_id, uniqueness: { scope: :dep_class_id, message: "combination already exists" }
+  validates :teacher_course_id, presence: true
 
   enum days: { day1: 1, day2: 2 }
 

@@ -1,6 +1,8 @@
 class DepartmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_department, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
+
   # GET /departments or /departments.json
   def index
     @departments = Department.all

@@ -34,14 +34,11 @@
                     </div>
                   </div>
                 </div>
-            <div class="ui selection dropdown">
-              <%= form.hidden_field :days %>
-              <i class="dropdown icon"></i>
-              <div class="default text">Select Day</div>
-              <div class="menu scrolling">
-                <%= form.select :days, ClassCourseSlot.days.map { |day,value| [day.capitalize, day] }, {}, class: "ui item selection dropdown" %>
+            <% if alert %>
+              <div class="alert alert-danger">
+                <%= alert %>
               </div>
-            </div>
+            <% end %>
 
               <%= form.hidden_field :slot_id, value: 1 %>
 

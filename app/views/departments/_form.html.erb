@@ -1,15 +1,18 @@
-<%= form_with(model: department) do |form| %>
-  <% if department.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(department.errors.count, "error") %> prohibited this department from being saved:</h2>
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%debugger %>
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 
-      <ul>
-        <% department.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+
+<%= form_with(model: department) do |form| %>
+  <%# if department.errors.any? %>
+<!--    <div style="color: red">-->
+<!--      <h2><%#= pluralize(department.errors.count, "error") %> prohibited this department from being saved:</h2>-->
+
+<!--    </div>-->
+  <%# end %>
   <section class="">
   <div class="container">
     <div class="signup-content">
@@ -22,6 +25,11 @@
                   <%#= form.label :courseName, style: "display: block" %>
                   <%= form.text_field :name,placeholder: "Department Name",class: "fs-5"%>
             </div>
+            <% if department.errors.has_key?(:name) %>
+              <div class="alert alert-danger">
+                <%= department.errors.full_messages_for(:name).join(", ") %>
+              </div>
+            <% end %>
 
            
             <div class="form-group form-button">

@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org', mirror: 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
@@ -79,3 +79,8 @@ gem 'sassc-rails'
 gem 'semantic-ui-sass'
 gem 'pg'
 gem 'simple_calendar', '~> 3.0', '>= 3.0.1'
+
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
+gem 'cancancan'

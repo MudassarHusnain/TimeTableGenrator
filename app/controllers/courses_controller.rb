@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course,:set_department, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   # GET /courses or /courses.json
   def index

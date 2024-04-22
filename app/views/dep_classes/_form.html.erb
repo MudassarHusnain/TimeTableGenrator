@@ -1,15 +1,15 @@
 <%= form_with(model: [department,dep_class],url: department_dep_classes_path(department)) do |form| %>
-    <% if dep_class.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(dep_class.errors.count, "error") %> prohibited this dep_class from being saved:</h2>
+    <%# if dep_class.errors.any? %>
+<!--    <div style="color: red">-->
+<!--      <h2><%#= pluralize(dep_class.errors.count, "error") %> prohibited this dep_class from being saved:</h2>-->
 
-      <ul>
-        <% dep_class.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<!--      <ul>-->
+        <%# dep_class.errors.each do |error| %>
+<!--          <li><%#= error.full_message %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
 
   <section class="ms-5 ps-3">
     <div class="container">
@@ -23,7 +23,11 @@
                 <%#= form.label :courseName, style: "display: block" %>
                 <%= form.text_field :name,placeholder: "Class Name",class: "fs-5"%>
               </div>
-
+              <% if dep_class.errors.has_key?(:name) %>
+                <div class="alert alert-danger">
+                  <%= dep_class.errors.full_messages_for(:name).join(", ") %>
+                </div>
+              <% end %>
               <div class="mt-4 ui selection dropdown">
                 <%= form.hidden_field :class_type %>
                 <i class="dropdown icon"></i>
@@ -33,6 +37,11 @@
 
                 </div>
               </div>
+              <% if dep_class.errors.has_key?(:class_type) %>
+                <div class="alert alert-danger">
+                  <%= dep_class.errors.full_messages_for(:class_type).join(", ") %>
+                </div>
+              <% end %>
 
                 <%= form.hidden_field :room_id,value: 1 %>
 
@@ -51,3 +60,36 @@
 
   </section>
 <% end %>
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', function() {-->
+<!--        var form = document.getElementById('your-form-id');-->
+
+<!--        form.addEventListener('submit', function(event) {-->
+<!--            event.preventDefault(); // Prevent default form submission-->
+
+<!--            var formData = new FormData(form);-->
+
+<!--            var xhr = new XMLHttpRequest();-->
+<!--            xhr.open('POST', form.action);-->
+<!--            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); // Add header to indicate AJAX request-->
+<!--            xhr.onreadystatechange = function() {-->
+<!--                if (xhr.readyState === XMLHttpRequest.DONE) {-->
+<!--                    if (xhr.status === 200) {-->
+<!--                        var response = JSON.parse(xhr.responseText);-->
+<!--                        if (response.errors) {-->
+<!--                            // Display validation errors-->
+<!--                            Object.keys(response.errors).forEach(function(key) {-->
+<!--                                document.getElementById('error-' + key).textContent = response.errors[key];-->
+<!--                            });-->
+<!--                        } else {-->
+<!--                            // If no errors, redirect or perform other actions-->
+<!--                            window.location.href = response.redirectUrl;-->
+<!--                        }-->
+<!--                    }-->
+<!--                }-->
+<!--            };-->
+<!--            xhr.send(formData);-->
+<!--        });-->
+<!--    });-->
+
+<!--</script>-->
