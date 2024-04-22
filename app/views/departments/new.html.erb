@@ -1,2 +1,7 @@
-
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%debugger %>
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 <%= render "form", department: @department %>

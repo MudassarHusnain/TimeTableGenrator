@@ -1,6 +1,7 @@
 class DepClassesController < ApplicationController
   before_action :set_dep_class, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   # GET /dep_classes or /dep_classes.json
   def index
@@ -73,6 +74,19 @@ class DepClassesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def download_pdf
+    @department = Department.find_by(id: params[:department_id])
+    @dep_class = DepClass.find_by(id: params[:dep_class_id])
+    respond_to do |format|
+      format.pdf do
+        render pdf: "#{@dep_class.name.capitalize} Time Table.pdf",
+               template: "dep_classes/download_pdf",
+               disposition: 'attachment'
+      end
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

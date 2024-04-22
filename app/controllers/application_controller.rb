@@ -11,4 +11,13 @@ class ApplicationController < ActionController::Base
 
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:email, :password, :password_confirmation,:username,:roles)}
   end
+
+  rescue_from CanCan::AccessDenied, with: :access_denied
+
+  private
+
+  def access_denied
+    flash[:alert] = "You are not authorized to access this page."
+    redirect_to request.referrer
+  end
 end

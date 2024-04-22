@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :rooms
     resources :dep_classes do
       resources :class_course_slots
+      get '/generate_pdf', to: 'dep_classes#download_pdf'
     end
     resources :slots
   

@@ -34,7 +34,14 @@
                     </div>
                   </div>
                 </div>
-            
+
+            <% if alert %>
+              <div class="alert alert-danger">
+                <%= alert %>
+              </div>
+            <% end %>
+
+              <%= form.hidden_field :slot_id, value: 1 %>
               <div class="form-group form-button">
                 <%= form.submit "Create Class", class: "form-submit fs-5" %>
               </div>
