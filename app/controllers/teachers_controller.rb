@@ -28,7 +28,7 @@ class TeachersController < ApplicationController
     @teacher = @department.teachers.new(teacher_params)
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to department_teacher_url(@department,@teacher), notice: "Teacher was successfully created." }
+        format.html { redirect_to department_teachers_url(@department), notice: "Teacher was successfully created." }
         format.json { render :show, status: :created, location: @teacher }
       else
         format.html { render :new, status: :unprocessable_entity }

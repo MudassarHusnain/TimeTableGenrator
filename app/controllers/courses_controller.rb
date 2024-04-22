@@ -26,13 +26,17 @@ class CoursesController < ApplicationController
   def create
     @teacher = Teacher.find(params[:course][:teacher_id])
     @department = Department.find(params[:department_id])
-    # debugger
-    @course = Course.find_by(courseName: course_params[:courseName]) || @department.courses.new(course_params.except(:teacher_id))
+    @course = Course.find_by(courseName: course_params[:courseName]) || @department.courses.new(course_params)
+    debugger
+    if !TeacherCourse.where(course_id:@course.id,teacher_id: @teacher.id).empty?
+      flash[:notice] = "Teacher Alreday Teach this Subject."
+      redirect_to new_department_course_path(@department) and return
+    end
     @teacher.courses << @course
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to department_course_path(@department,@course), notice: "Course was successfully created." }
+        format.html { redirect_to department_courses_path(@department), notice: "Course was successfully created." }
         format.json { render :show, status: :created, location: @course }
       else
         flash[:error] = "Already have a Course and Teacher"

@@ -35,7 +35,7 @@ class DepClassesController < ApplicationController
       redirect_to new_department_dep_class_path(@department) # Redirect to the new action
     else
       dep_class_params[:room_id] = @afternoon_available_rooms.uniq.first.id
-      debugger
+      
       @dep_class = @department.dep_classes.new(dep_class_params)
       @dep_class.room_id = @afternoon_available_rooms.first.id
 

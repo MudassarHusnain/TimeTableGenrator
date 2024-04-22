@@ -29,7 +29,7 @@ class RoomsController < ApplicationController
 
     respond_to do |format|
       if @room.save
-        format.html { redirect_to department_room_url(@department,@room), notice: "Room was successfully created." }
+        format.html { redirect_to department_rooms_url(@department,@room), notice: "Room was successfully created." }
         format.json { render :show, status: :created, location: @room }
       else
         format.html { render :new, status: :unprocessable_entity }

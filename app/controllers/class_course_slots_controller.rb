@@ -63,7 +63,6 @@ class ClassCourseSlotsController < ApplicationController
 
       @available_slots_day1
       @available_slots_day2
-      debugger
       #   available slots for morning class and after
       if @class.class_type == 'morning'
       @available_slots_day1= @slots_for_morning.ids - @used_slots_day1
@@ -119,7 +118,6 @@ class ClassCourseSlotsController < ApplicationController
   # DELETE /class_course_slots/1 or /class_course_slots/1.json
   def destroy
     @department = Department.find_by(id: params[:department_id])
-    debugger
     @class = DepClass.find_by(id: params[:dep_class_id])
     @class_course_slot.destroy
 

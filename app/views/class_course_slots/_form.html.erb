@@ -34,17 +34,7 @@
                     </div>
                   </div>
                 </div>
-            <div class="ui selection dropdown">
-              <%= form.hidden_field :days %>
-              <i class="dropdown icon"></i>
-              <div class="default text">Select Day</div>
-              <div class="menu scrolling">
-                <%= form.select :days, ClassCourseSlot.days.map { |day,value| [day.capitalize, day] }, {}, class: "ui item selection dropdown" %>
-              </div>
-            </div>
-
-              <%= form.hidden_field :slot_id, value: 1 %>
-
+            
               <div class="form-group form-button">
                 <%= form.submit "Create Class", class: "form-submit fs-5" %>
               </div>

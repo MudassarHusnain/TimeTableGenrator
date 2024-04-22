@@ -28,10 +28,12 @@ class SlotsController < ApplicationController
     @department = Department.find_by(id: params[:department_id])
 
     @slot = @department.slots.new(slot_params)
+    # debugger
+    @slot.start_time = slot_params[:start_time]
 
     respond_to do |format|
       if @slot.save
-        format.html { redirect_to department_slot_url(@department,@slot), notice: "Slot was successfully created." }
+        format.html { redirect_to department_slots_url(@department), notice: "Slot was successfully created." }
         format.json { render :show, status: :created, location: @slot }
       else
         format.html { render :new, status: :unprocessable_entity }
