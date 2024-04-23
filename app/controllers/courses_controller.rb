@@ -28,7 +28,6 @@ class CoursesController < ApplicationController
     @teacher = Teacher.find(params[:course][:teacher_id])
     @department = Department.find(params[:department_id])
     @course = Course.find_by(courseName: course_params[:courseName]) || @department.courses.new(course_params)
-    debugger
     if !TeacherCourse.where(course_id:@course.id,teacher_id: @teacher.id).empty?
       flash[:notice] = "Teacher Alreday Teach this Subject."
       redirect_to new_department_course_path(@department) and return

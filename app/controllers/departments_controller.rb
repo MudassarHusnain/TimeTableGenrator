@@ -59,6 +59,11 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  def department_time_table
+    @department = Department.find_by(id: params[:department_id])
+    authorize! :department_time_table, @department
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_department

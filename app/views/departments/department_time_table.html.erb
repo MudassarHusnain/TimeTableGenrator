@@ -28,20 +28,19 @@
 
   </div>
   <% @department.dep_classes.each do |dep_class| %>
-    <h2 class="mt-4"><%= dep_class.name.capitalize %> Subjects</h2>
+    <h2 class="mt-4"><%= dep_class.name.capitalize %> Class Time Table</h2>
     <% if current_user.admin? %>
       <%= link_to "Add Courses", new_department_dep_class_class_course_slot_path(@department, dep_class), class: "btn btn-primary" %>
     <% end %>
     <div class="row">
       <div class="col text-end">
-        <%= link_to "Download Time Table", department_dep_class_generate_pdf_path(@department, dep_class, format: :pdf), class: "btn btn-secondary" %>
+        <%= link_to "Download Time Table", department_dep_class_generate_pdf_path(@department, dep_class, format: :pdf), class: " mb-4 btn btn-secondary" %>
       </div>
     </div>
     <div class="header">
       <%= dep_class.name.capitalize %> Time Table
     </div>
 
-    <div class="container">
       <table>
         <thead>
         <tr>
@@ -89,7 +88,7 @@
         <% end %>
         </tbody>
       </table>
-    </div>
+    <br/>
   <% end %>
 </div>
 

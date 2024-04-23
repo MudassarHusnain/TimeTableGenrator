@@ -8,9 +8,13 @@ Rails.application.routes.draw do
       get '/generate_pdf', to: 'dep_classes#download_pdf'
     end
     resources :slots
+    get '/dep_time_table', to: 'departments#department_time_table'
   
   end
-  devise_for :users
+  devise_for :users do
+    post 'password/forgot', to: 'password#forgot'
+    post 'password/reset', to: 'password#reset'
+  end
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

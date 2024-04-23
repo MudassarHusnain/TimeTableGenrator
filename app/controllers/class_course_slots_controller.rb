@@ -65,7 +65,7 @@ class ClassCourseSlotsController < ApplicationController
 
           @available_slots_day1
           @available_slots_day2
-          debugger
+
           #   available slots for morning class and after
           if @class.class_type == 'morning'
           @available_slots_day1= @slots_for_morning.ids - @used_slots_day1

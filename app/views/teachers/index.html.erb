@@ -1,53 +1,64 @@
 <div class="container" style="margin-top: 20%;margin-left: 20%;width: 100%">
-  <div class="row justify-content-center mt-4">
-    <div class="col-auto">
-      <%= link_to "Teachers",department_teachers_path(params[:department_id]), class: "btn btn-primary" %>
-    </div>
-    <div class="col-auto">
-      <%= link_to "Courses", department_courses_path(params[:department_id]), class: "btn btn-primary" %>
-    </div>
-    <div class="col-auto">
-      <%= link_to "Rooms", department_rooms_path(params[:department_id]), class: "btn btn-primary" %>
-    </div>
-    <div class="col-auto">
-      <%= link_to "Class", department_dep_classes_path(@department), class: "btn btn-primary" %>
-    </div>
-    <div class="col-auto">
-      <%= link_to "Slots", department_slots_path(@department), class: "btn btn-primary" %>
-    </div>
-    
-  </div>
+    <div class="row justify-content-center mt-4">
+      <div class="col-auto">
+        <%= link_to "Teachers", department_teachers_path(params[:department_id]), class: "btn btn-primary" %>
+      </div>
+      <div class="col-auto">
+        <%= link_to "Courses", department_courses_path(params[:department_id]), class: "btn btn-primary" %>
+      </div>
+      <% if current_user.admin? %>
+        <div class="col-auto">
+          <%= link_to "Rooms", department_rooms_path(params[:department_id]), class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <div class="col-auto">
+        <%= link_to "Class", department_dep_classes_path(@department), class: "btn btn-primary" %>
+      </div>
+      <% if current_user.admin? %>
+        <div class="col-auto">
+          <%= link_to "Slots", department_slots_path(@department), class: "btn btn-primary" %>
+        </div>
+      <% end %>
 
-  <h2 class="mt-4">Teachers Information</h2>
-  <%= link_to "Add Teacher",new_department_teacher_path(params[:department_id]),class: "btn btn-primary" %>
-  <table class="table mt-4">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Teacher Name</th>
-      <th scope="col">Department</th>
-      <th scope="col">Subject</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @department.teachers.all.each.with_index(1) do |teacher, index| %>
+    </div>
+
+    <h2 class="mt-4">Teachers Information</h2>
+    <%= link_to "Add Teacher", new_department_teacher_path(params[:department_id]), class: "btn btn-primary" %>
+    <table class="table mt-4">
+      <thead>
       <tr>
-        <th scope="row"><%= index %></th>
-        <td><%= teacher.name %></td>
-        <td><%= teacher.department.name %></td>
-        <td>
-          <div class="ui selection dropdown">
-            <i class="dropdown icon"></i>
-            <div class="default text fs-5 ms-5">Courses</div>
-            <div class="menu scrolling">
-              <% teacher.courses.each do |course| %>
-                <div class="item" data-value="<%= course.id %>"><%= course.courseName.capitalize%></div>
-              <% end %>
-            </div>
-          </div>
-        </td>
+        <th scope="col">#</th>
+        <th scope="col">Teacher Name</th>
+        <th scope="col">Department</th>
+        <th scope="col">Subject</th>
       </tr>
-    <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+      <% @department.teachers.all.each.with_index(1) do |teacher, index| %>
+        <tr>
+          <th scope="row"><%= index %></th>
+          <td><%= teacher.name %></td>
+          <td><%= teacher.department.name %></td>
+          <td>
+            <div class="ui selection dropdown">
+              <i class="dropdown icon"></i>
+              <div class="default text fs-5 ms-5">Courses</div>
+              <div class="menu scrolling">
+                <% teacher.courses.each do |course| %>
+                  <div class="item" data-value="<%= course.id %>"><%= course.courseName.capitalize %></div>
+                <% end %>
+              </div>
+            </div>
+          </td>
+          <% if current_user.admin? %>
+            <td>
+              <%= link_to "delete", department_teacher_path(department,teacher), data: { turbo_method: :delete, turbo_confirm: :"Are you Sure To delete" }, class: "fa fa-trash " %>
+              <%= link_to "Edit" , edit_department_teacher_path(department,teacher),class: "ms-3" %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

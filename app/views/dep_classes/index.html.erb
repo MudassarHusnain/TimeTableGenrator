@@ -1,27 +1,35 @@
-
 <div class="container" style="margin-top: 20%;margin-left: 20%;width: 100%">
   <div class="row justify-content-center mt-4">
+  <div class="col-auto">
+    <%= link_to "Teachers", department_teachers_path(@department), class: "btn btn-primary" %>
+  </div>
+  <div class="col-auto">
+    <%= link_to "Courses", department_courses_path(@department), class: "btn btn-primary" %>
+  </div>
+  <% if current_user.admin? %>
     <div class="col-auto">
-      <%= link_to "Teachers",department_teachers_path(params[:department_id]), class: "btn btn-primary" %>
+      <%= link_to "Rooms", department_rooms_path(@department), class: "btn btn-primary" %>
     </div>
-    <div class="col-auto">
-      <%= link_to "Courses", department_courses_path(params[:department_id]), class: "btn btn-primary" %>
-    </div>
-    <div class="col-auto">
-      <%= link_to "Rooms", department_rooms_path(params[:department_id]), class: "btn btn-primary" %>
-    </div>
-    <div class="col-auto">
-      <%= link_to "Class", department_dep_classes_path(@department), class: "btn btn-primary" %>
-    </div>
+  <% end %>
+  <div class="col-auto">
+    <%= link_to "Class", department_dep_classes_path(@department), class: "btn btn-primary" %>
+  </div>
+  <% if current_user.admin? %>
     <div class="col-auto">
       <%= link_to "Slots", department_slots_path(@department), class: "btn btn-primary" %>
     </div>
-    
+  <% end %>
+  <div class="col-auto">
+    <%= link_to "Department Time Table", department_dep_time_table_path(@department), class: "btn btn-primary" %>
   </div>
 
-  <h2 class="mt-4">Classes Information</h2>
-  <%= link_to "Add Class",new_department_dep_class_path(params[:department_id]),class: "btn btn-primary" %>
+</div>
 
+  <h2 class="mt-4">Classes Information</h2>
+  <% if current_user.admin? %>
+
+    <%= link_to "Add Class", new_department_dep_class_path(params[:department_id]), class: "btn btn-primary" %>
+  <% end %>
   <table class="table mt-4">
     <thead>
     <tr>
@@ -35,7 +43,7 @@
     <% @department.dep_classes.all.each.with_index(1) do |depclass, index| %>
       <tr>
         <th scope="row"><%= index %></th>
-        <td><%= link_to depclass.name,department_dep_class_path(@department,depclass) %></td>
+        <td><%= link_to depclass.name, department_dep_class_path(@department, depclass) %></td>
         <td><%= depclass.department.name %></td>
         <td>
           <%= depclass.strength %>
@@ -46,15 +54,18 @@
             <div class="default text fs-5 ms-5">Courses</div>
             <div class="menu scrolling">
               <% depclass.class_course_slots.each do |schdule| %>
-                <div class="item" data-value="<%= schdule.id %>"><%= "#{schdule.teacher_course.course.courseName.capitalize} by ( #{schdule.teacher_course.teacher.name.capitalize})"%> 
-                <%= link_to "delete",department_dep_class_class_course_slot_path(@department,depclass,schdule),data: {turbo_method: :delete,turbo_confirm: "Are you sure to want to delete"}%></div>
+                <div class="item" data-value="<%= schdule.id %>"><%= "#{schdule.teacher_course.course.courseName.capitalize} by ( #{schdule.teacher_course.teacher.name.capitalize})" %>
+                  <%= link_to "delete", department_dep_class_class_course_slot_path(@department, depclass, schdule), data: { turbo_method: :delete, turbo_confirm: "Are you sure to want to delete" } %></div>
               <% end %>
             </div>
           </div>
-          </td>
-        <td>
-          <%=link_to "Add Courses", new_department_dep_class_class_course_slot_path(@department,depclass) %>
         </td>
+        <td>
+          <%if current_user.admin? %>
+          <%= link_to "Delete", department_dep_class_path(@department, depclass),data: {turbo_method: :delete,turbo_confirm: :"Are you sure to Delete Class"} %>
+            <%end %>
+        </td>
+
       </tr>
     <% end %>
     </tbody>

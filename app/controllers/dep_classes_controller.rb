@@ -78,9 +78,10 @@ class DepClassesController < ApplicationController
   def download_pdf
     @department = Department.find_by(id: params[:department_id])
     @dep_class = DepClass.find_by(id: params[:dep_class_id])
+    authorize! :download_pdf, @dep_class
     respond_to do |format|
       format.pdf do
-        render pdf: "#{@dep_class.name.capitalize} Time Table.pdf",
+        render pdf: "#{@dep_class.name.capitalize} Time Table",
                template: "dep_classes/download_pdf",
                disposition: 'attachment'
       end

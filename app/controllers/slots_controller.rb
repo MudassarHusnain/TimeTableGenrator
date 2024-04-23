@@ -29,7 +29,6 @@ class SlotsController < ApplicationController
     @department = Department.find_by(id: params[:department_id])
 
     @slot = @department.slots.new(slot_params)
-    # debugger
     @slot.start_time = slot_params[:start_time]
 
     respond_to do |format|

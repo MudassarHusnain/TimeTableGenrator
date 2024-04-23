@@ -13,6 +13,11 @@ class Ability
       # Teachers and students can only read ClassCourseSlot
       can :read, ClassCourseSlot
       can :read, DepClass
+      can :download_pdf, DepClass
+      can :read ,Teacher
+      can :read, Course
+      can :read, Department
+      can :department_time_table, Department
     end
     # Define abilities for the user here. For example:
     #
