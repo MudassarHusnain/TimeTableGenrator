@@ -98,37 +98,7 @@ class ClassCourseSlotsController < ApplicationController
             end
           end
 
-<<<<<<< HEAD
-      @available_slots_day1
-      @available_slots_day2
-      #   available slots for morning class and after
-      if @class.class_type == 'morning'
-      @available_slots_day1= @slots_for_morning.ids - @used_slots_day1
-      @available_slots_day2 = @slots_for_morning.ids - @used_slots_day2
-      else
-        @available_slots_day1= @slots_for_afternoon.ids - @used_slots_day1
-        @available_slots_day2 = @slots_for_afternoon.ids - @used_slots_day2
-      end
-      if !@available_slots_day1.empty?
-        @class_course_slot = @class.class_course_slots.new(class_course_slot_params)
-        @class_course_slot.slot_id = @available_slots_day1.first
-        @class_course_slot.days = "day1"
-      elsif !@available_slots_day2.empty?
-        @class_course_slot = @class.class_course_slots.new(class_course_slot_params)
-        @class_course_slot.slot_id = @available_slots_day2.first
-        @class_course_slot.days = "day2"
-      elsif @available_slots_day1.empty? && @available_slots_day2.empty?
-        flash[:notice] = "There are no available slots for this Teacher that you have selected"
-        redirect_to new_department_dep_class_class_course_slot_path(@department,@class) and return # Redirect to the new action
-      end
 
-
-      respond_to do |format|
-        if @class_course_slot.save
-          format.html { redirect_to department_dep_class_url(@department,@class), notice: "Class course slot was successfully created." }
-          format.json { render :show, status: :created, location: @class_course_slot }
-=======
->>>>>>> bbe43f47a321d3034b56bb05a9ce83623fbdd864
         else
           flash[:notice] = "Course Is already present."
           redirect_to new_department_dep_class_class_course_slot_path(@department,@class) # Redirect to the new action
