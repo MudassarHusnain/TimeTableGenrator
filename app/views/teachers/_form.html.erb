@@ -1,4 +1,5 @@
-<%= form_with(model: [department,teacher],url: department_teachers_path(department)) do |form| %>
+<%#= form_with(model: [department,teacher],url: department_teachers_path(department)) do |form| %>
+<%= form_with(model: [department, teacher], url: (teacher.persisted? ? department_teacher_path(department, teacher) : department_teachers_path(department)), method: (teacher.persisted? ? :patch : :post)) do |form| %>
 
   <% if teacher.errors.any? %>
     <div style="color: red">
@@ -22,14 +23,12 @@
               <label for="name"><i class="zmdi zmdi-account material-icons-name fs-5"></i></label>
               <div class="form-group">
                 <%#= form.label :courseName, style: "display: block" %>
-                <%= form.text_field :name,placeholder: "Teacher Name",class: "fs-5"%>
+                <%= form.text_field :name, placeholder: "Teacher Name", class: "fs-5" %>
               </div>
 
               <div class="form-group form-button">
-                <%= form.submit "Create Teacher",class: "form-submit fs-5" %>
+                <%= form.submit class: "form-submit fs-5" %>
               </div>
-
-
             </div>
           </form>
           <div>
