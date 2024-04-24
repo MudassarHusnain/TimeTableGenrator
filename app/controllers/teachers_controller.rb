@@ -11,6 +11,8 @@ class TeachersController < ApplicationController
 
   # GET /teachers/1 or /teachers/1.json
   def show
+    @department = Department.find_by(id: params[:department_id])
+
   end
 
   # GET /teachers/new
@@ -21,6 +23,8 @@ class TeachersController < ApplicationController
 
   # GET /teachers/1/edit
   def edit
+    @department = Department.find_by(id: params[:department_id])
+
   end
 
   # POST /teachers or /teachers.json

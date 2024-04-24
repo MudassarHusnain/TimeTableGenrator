@@ -52,8 +52,8 @@
           </td>
           <% if current_user.admin? %>
             <td>
-              <%= link_to "delete", department_teacher_path(department,teacher), data: { turbo_method: :delete, turbo_confirm: :"Are you Sure To delete" }, class: "fa fa-trash " %>
-              <%= link_to "Edit" , edit_department_teacher_path(department,teacher),class: "ms-3" %>
+              <%= link_to "delete", department_teacher_path(@department,teacher), data: { turbo_method: :delete, turbo_confirm: :"Are you Sure To delete" }, class: "fa fa-trash " %>
+              <%= link_to "Edit" , edit_department_teacher_path(@department,teacher),class: "ms-3" %>
             </td>
           <% end %>
         </tr>

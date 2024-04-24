@@ -59,29 +59,33 @@
             <td>
               <% dep_class.class_course_slots.each do |class_course_slot| %>
                 <% if class_course_slot.slot_id == slot.id && class_course_slot.days == "day1" %>
-                  <%= class_course_slot.teacher_course.course.courseName %>
-                <% end %>
+Course Name: <%= class_course_slot.teacher_course.course.courseName %>
+                  <br/> 
+                  Rooms #: <%= dep_class.room.name%>                <% end %>
               <% end %>
             </td>
             <td>
               <% dep_class.class_course_slots.each do |class_course_slot| %>
                 <% if class_course_slot.slot_id == slot.id && class_course_slot.days == "day2" %>
-                  <%= class_course_slot.teacher_course.course.courseName %>
-                <% end %>
+Course Name: <%= class_course_slot.teacher_course.course.courseName %>
+                  <br/> 
+                  Rooms #: <%= dep_class.room.name%>                <% end %>
               <% end %>
             </td>
             <td>
               <% dep_class.class_course_slots.each do |class_course_slot| %>
                 <% if class_course_slot.slot_id == slot.id && class_course_slot.days == "day1" %>
-                  <%= class_course_slot.teacher_course.course.courseName %>
-                <% end %>
+Course Name: <%= class_course_slot.teacher_course.course.courseName %>
+                  <br/> 
+                  Rooms #: <%= dep_class.room.name%>                <% end %>
               <% end %>
             </td>
             <td>
               <% dep_class.class_course_slots.each do |class_course_slot| %>
                 <% if class_course_slot.slot_id == slot.id && class_course_slot.days == "day2" %>
-                  <%= class_course_slot.teacher_course.course.courseName %>
-                <% end %>
+Course Name: <%= class_course_slot.teacher_course.course.courseName %>
+                  <br/> 
+                  Rooms #: <%= dep_class.room.name%>                <% end %>
               <% end %>
             </td>
           </tr>
