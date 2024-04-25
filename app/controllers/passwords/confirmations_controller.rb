@@ -4,11 +4,13 @@ class Passwords::ConfirmationsController < Devise::ConfirmationsController
   # GET /resource/confirmation/new
   # def new
   #   super
+  #   bebugger
   # end
 
-  # POST /resource/confirmation
+  #POST /resource/confirmation
   # def create
   #   super
+  #   debugger
   # end
 
   # GET /resource/confirmation?confirmation_token=abcdef
