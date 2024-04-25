@@ -60,8 +60,8 @@ class ClassCourseSlotsController < ApplicationController
           @used_slots_day2 = (@class_used_slots_day2+ @teacher_reserved_slots_day2).uniq
 
           #   all the slots for morning and afternoon class
-          @slots_for_morning = Slot.where("EXTRACT(HOUR FROM start_time) <= ?", 12)
-          @slots_for_afternoon= Slot.where("EXTRACT(HOUR FROM start_time) >= ?", 12)
+          @slots_for_morning = @department.slots.where("EXTRACT(HOUR FROM start_time) <= ?", 12)
+          @slots_for_afternoon= @department.slots.where("EXTRACT(HOUR FROM start_time) >= ?", 12)
 
           @available_slots_day1
           @available_slots_day2
@@ -132,7 +132,7 @@ class ClassCourseSlotsController < ApplicationController
     @class_course_slot.destroy
 
     respond_to do |format|
-      format.html { redirect_to department_dep_class_class_course_slots_url(@department,@class), notice: "Class course slot was successfully destroyed." }
+      format.html { redirect_to department_dep_class_url(@department,@class), notice: "Class course slot was successfully destroyed." }
       format.json { head :no_content }
     end
   end

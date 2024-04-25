@@ -11,10 +11,7 @@ Rails.application.routes.draw do
     get '/dep_time_table', to: 'departments#department_time_table'
   
   end
-  devise_for :users do
-    post 'password/forgot', to: 'password#forgot'
-    post 'password/reset', to: 'password#reset'
-  end
+  devise_for :users, controllers: { passwords: 'passwords/passwords' }
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

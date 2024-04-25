@@ -1,4 +1,0 @@
-class PasswordsController < ApplicationController
-
-
-end
