@@ -62,7 +62,7 @@
                 <i class="dropdown icon"></i>
                 <div class="default text">Role</div>
                 <div class="menu scrolling">
-                  <%= f.select :roles, User.roles.map { |role,value| [role.capitalize, role] }, {}, class: "ui item selection dropdown" %>
+                  <%= f.select :roles, User.roles.keys.reject { |role| role == 'admin' }.map { |role| [role.capitalize, role] }, {}, class: "ui item selection dropdown" %>
                 </div>
               </div>
 
