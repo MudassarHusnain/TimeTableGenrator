@@ -1,2 +1,37 @@
-<h1>TeachersStudentsUsers#index</h1>
-<p>Find me in app/views/teachers_students_users/index.html.erb</p>
+<div class="container" style="margin-top: 50px;">
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Username</th>
+      <th>Roles</th>
+      <th>Verified</th>
+      <th>Verification Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.username %></td>
+        <td><%= user.roles %></td>
+        <td>
+          <% if user.verified? %>
+            <span class="badge bg-success">&#x2713;</span>
+          <% else %>
+            <span class="badge bg-danger">&#x2717;</span>
+          <% end %>
+        </td>
+        <td>
+          <%= form_with(model: user, url: all_users_update_path(user), local: true, html: { class: "d-inline" }) do |form| %>
+            <%= form.check_box :verified, class: "form-check-input me-1" %>
+            <%= form.submit "Update", class: "btn btn-primary btn-sm" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

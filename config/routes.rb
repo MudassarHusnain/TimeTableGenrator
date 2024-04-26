@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'teachers_students_users/index'
+  get 'all_users',to: 'teachers_students_users#index'
+  patch 'all_users_update/:id', to: 'teachers_students_users#update', as: 'all_users_update'
   resources :departments do
     resources :courses
     resources :teachers
