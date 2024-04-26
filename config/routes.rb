@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'teachers_students_users/index'
   resources :departments do
     resources :courses
     resources :teachers
@@ -11,8 +12,11 @@ Rails.application.routes.draw do
     get '/dep_time_table', to: 'departments#department_time_table'
   
   end
-  devise_for :users, controllers: { passwords: 'passwords/passwords' }
-
+  devise_for :users, controllers: {
+    passwords: 'passwords/passwords',
+    registrations: 'passwords/registrations',
+    sessions: 'passwords/sessions',
+  }
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

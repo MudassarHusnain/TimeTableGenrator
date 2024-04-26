@@ -28,8 +28,7 @@
 
 <%#= render "devise/shared/links" %>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name),data:{turbo:false }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <div class="">
+    <div class="">
 
     <!-- Sign up form -->
     <section class="">
@@ -43,19 +42,39 @@
                 <!--              <input type="text" name="name" id="name" placeholder="Your Name"/>-->
                 <%= f.text_field :username, placeholder: "Full Name" %>
               </div>
+              <% if alert %>
+                <div class="alert alert-danger">
+                  <%= alert %>
+                </div>
+              <% end %>
               <div class="form-group">
                 <label for="email"><i class="zmdi zmdi-email"></i></label>
                 <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "Email" %>
               </div>
+              <% if alert %>
+                <div class="alert alert-danger">
+                  <%= alert %>
+                </div>
+              <% end %>
               <div class="form-group">
                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                 <%= f.password_field :password, autocomplete: "new-password",placeholder: "Password" %>
               </div>
+              <% if alert %>
+                <div class="alert alert-danger">
+                  <%= alert %>
+                </div>
+              <% end %>
               <br>
               <div class="form-group">
                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                 <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder: "Confirm Password" %>
               </div>
+              <% if alert %>
+                <div class="alert alert-danger">
+                  <%= alert %>
+                </div>
+              <% end %>
 
               <div class="ui selection dropdown">
                 <%= f.hidden_field :roles %>
@@ -65,7 +84,21 @@
                   <%= f.select :roles, User.roles.keys.reject { |role| role == 'admin' }.map { |role| [role.capitalize, role] }, {}, class: "ui item selection dropdown" %>
                 </div>
               </div>
-
+              <% if alert %>
+                <div class="alert alert-danger">
+                  <%= alert %>
+                </div>
+              <% end %>
+              <br/>
+              <% if @user.errors.any? %>
+                <div class="alert alert-danger">
+                  <ul>
+                    <% @user.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
 
 
               <br/>
