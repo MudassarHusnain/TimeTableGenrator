@@ -10,9 +10,17 @@ class Passwords::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    debugger
+    @user = User.new(user_params)
+
+    if @user.save
+      UserMailer.welcome_email(@user).deliver_later(wait: 30.seconds)
+      flash[:notice] = "you successfully signed up After few Minutes You will be Verified"
+      redirect_to new_user_session_path
+    end
+    debugger
+  end
 
   # GET /resource/edit
   # def edit
@@ -59,4 +67,11 @@ class Passwords::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+
+  private
+
+  def user_params
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :roles)
+  end
 end

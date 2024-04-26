@@ -1,6 +1,6 @@
 <!--<h2>Log in</h2>-->
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name),data: {turbo: :false}) do |f| %>
   <!--
   <section class="sign-in"><div class="field">-->
   <!--    <%#= f.label :email %><br />-->
@@ -24,6 +24,7 @@
   <!--  </div>-->
 
 <%#= render "devise/shared/links" %>
+
   <div class="container mt-5">
     <div class="signup-content">
       <div class="signup-image">
@@ -44,6 +45,14 @@
             <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
             <%= f.password_field :password, autocomplete: "current-password",placeholder: "Password" %>
           </div>
+          <% if alert %>
+            <div class="alert alert-danger">
+              <%= alert %>
+            </div>
+          <% end %>
+          <%= flash[:notice] %>
+          <%= flash[:alert] %>
+
           <div class="form-group">
             <%= f.check_box :remember_me ,class: "agree-term"%>
 
@@ -54,6 +63,8 @@
 
           </div>
         </form>
+        <%= render "devise/shared/links" %>
+
         <div class="social-login">
           <span class="social-label">Or login with</span>
           <ul class="socials">
@@ -68,4 +79,3 @@
   </section>
 
 <% end %>
-<%= render "devise/shared/links" %>

@@ -16,6 +16,11 @@
             </div>
           </div>
         </li>
+        <li class="nav-item mt-4 text-light  text fs-5 ms-5">
+          <%= link_to "Users", all_users_path, class: "btn btn-light fs-5 btn-lg py-3 px-5" %>
+        </li>
+
+        </li>
 
       </ul>
       <%= link_to 'Logout', destroy_user_session_path, data: { remote: :true, turbo_method: :delete }, class: 'logout-link text-dark ms-5 btn btn-light btn-lg' %>

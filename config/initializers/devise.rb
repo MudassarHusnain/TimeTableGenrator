@@ -312,5 +312,4 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
 
-  config.navigational_foramts = ["*/*",:html, :turbo_stram]
 end
