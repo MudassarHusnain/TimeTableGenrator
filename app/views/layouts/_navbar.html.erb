@@ -1,4 +1,4 @@
-<%if(current_user) %>
+<%if(current_user && current_user.admin?) %>
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
@@ -16,8 +16,8 @@
             </div>
           </div>
         </li>
-        <li class="nav-item mt-4 text-light  text fs-5 ms-5">
-          <%= link_to "Users", all_users_path, class: "btn btn-light fs-5 btn-lg py-3 px-5" %>
+        <li class="nav-item mt-4 text-light  text">
+          <%= link_to "Users", all_users_path, class: "btn btn-light fs-5 btn-lg",style: "width: 100%;" %>
         </li>
 
         </li>
@@ -29,15 +29,77 @@
 
     <!-- Main Content -->
     <div class="col-lg-9 col-md-8 col-sm-12 main-content">
-      <%= yield %>
     </div>
     <!-- End Main Content -->
 
   </div>
 </div>
 
-<%else %>
-<div class="col-lg-9 col-md-8 col-sm-12 main-content">
-  <%= yield %>
-</div>
+<%elsif current_user && current_user.teacher? %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+      <%= image_tag 'logo.png', alt: 'Logo', class: 'm-1 rounded', style: 'width: 13%; height: 15%' %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item me-5">
+          <button class="nav-link active" aria-current="page" onclick="window.location.href='#'">Home</button>
+        </li>
+        <li class="nav-item me-5">
+      <%= link_to "Department Time Table", department_dep_time_table_path(department_id: current_user.department_id), class: "nav-link" %>
+        </li>
+        <li class="nav-item me-5">
+          <button class="nav-link" onclick="window.location.href='#'">Courses</button>
+        </li>
+        <li class="nav-item me-5">
+          <button class="nav-link" onclick="window.location.href='#'">MakeUp Request</button>
+        </li>
+        <%if current_user.present?%>
+        <li class="nav-item me-5">
+          <%= link_to "Logout",destroy_user_session_path,data:{turbo_method: :delete},class: "nav-link"%>
+        </li>
+        <%else%>
+        <li class="nav-item me-5">
+          <%= link_to "Login",new_user_session_path ,class: "nav-link"%>
+        </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</nav>
+<% elsif current_user.present? %>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+      <%= image_tag 'logo.png', alt: 'Logo', class: 'm-1 rounded', style: 'width: 13%; height: 15%' %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item me-5">
+          <button class="nav-link active" aria-current="page" onclick="window.location.href='#'">Home</button>
+        </li>
+        <li class="nav-item me-5">
+      <%= link_to "Department Time Table", department_dep_time_table_path(department_id: current_user.department_id), class: "nav-link" %>
+        </li>
+        <li class="nav-item me-5">
+          <button class="nav-link" onclick="window.location.href='#'">Courses</button>
+        </li>
+        
+        <%if current_user.present?%>
+        <li class="nav-item me-5">
+          <%= link_to "Logout",destroy_user_session_path,data:{turbo_method: :delete},class: "nav-link"%>
+        </li>
+        <%else%>
+        <li class="nav-item me-5">
+          <%= link_to "Login",new_user_session_path ,class: "nav-link"%>
+        </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</nav>
 <%end %>

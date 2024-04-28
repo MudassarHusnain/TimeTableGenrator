@@ -70,6 +70,17 @@
                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                 <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder: "Confirm Password" %>
               </div>
+
+              <div class="ui selection dropdown mb-4">
+                <%= f.hidden_field :department_id %>
+                <i class="dropdown icon"></i>
+                <div class="default text">Departments</div>
+                <div class="menu scrolling">
+                  
+                  <%= f.select :department_id, Department.all.map{ |department| [department.name.capitalize, department.id] }, {}, class: "ui item selection dropdown" %>
+                </div>
+              </div>
+
               <% if alert %>
                 <div class="alert alert-danger">
                   <%= alert %>

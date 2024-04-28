@@ -11,7 +11,7 @@ class Passwords::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super do |resource|
-      if resource && resource.verified? # Assuming you have a method named 'verified?' in your User model
+      if (resource && resource.verified) || (resource&.student? && !resource.verified?)
         flash[:notice] = "Signed in successfully."
       elsif resource && !resource.verified?
         flash[:alert] = "Your account is not verified yet. Please check your email for verification instructions."

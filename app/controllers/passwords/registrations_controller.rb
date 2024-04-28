@@ -11,15 +11,13 @@ class Passwords::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    debugger
     @user = User.new(user_params)
-
+     debugger
     if @user.save
       UserMailer.welcome_email(@user).deliver_later(wait: 30.seconds)
       flash[:notice] = "you successfully signed up After few Minutes You will be Verified"
       redirect_to new_user_session_path
     end
-    debugger
   end
 
   # GET /resource/edit
@@ -72,6 +70,6 @@ class Passwords::RegistrationsController < Devise::RegistrationsController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :roles)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :roles,:department_id)
   end
 end

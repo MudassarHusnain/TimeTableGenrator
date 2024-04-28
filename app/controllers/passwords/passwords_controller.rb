@@ -10,7 +10,9 @@ class Passwords::PasswordsController < Devise::PasswordsController
   # POST /resource/password
   def create
     @user = User.find_by(email: params[:user][:email])
-
+    raw, enc = Devise.token_generator.generate(User, :reset_password_token)
+    @user.reset_password_token = enc
+    @user.reset_password_sent_at = Time.now.utc
     if @user
       if @user.save
         UserMailer.forget_password_email(@user).deliver_now

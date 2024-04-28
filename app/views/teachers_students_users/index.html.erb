@@ -1,3 +1,5 @@
+<%if current_user.admin?%>
+
 <div class="container" style="margin-top: 10%; margin-left: 10%">
   <table class="table table-bordered table-hover">
     <thead class="thead-dark">
@@ -35,3 +37,4 @@
     </tbody>
   </table>
 </div>
+<%end%>
