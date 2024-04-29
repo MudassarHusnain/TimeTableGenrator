@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     end
     resources :slots
     get '/dep_time_table', to: 'departments#department_time_table'
-  
   end
+  resource :makeups
   devise_for :users, controllers: {
     passwords: 'passwords/passwords',
     registrations: 'passwords/registrations',

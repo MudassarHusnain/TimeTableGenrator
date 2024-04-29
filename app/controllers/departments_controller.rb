@@ -64,6 +64,13 @@ class DepartmentsController < ApplicationController
     authorize! :department_time_table, @department
   end
 
+  def makeup
+
+  end
+
+  def makeuprequest
+
+  end
 
 
   private
