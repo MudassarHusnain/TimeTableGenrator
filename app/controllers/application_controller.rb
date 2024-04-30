@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   private
 
   def access_denied
-    flash[:alert] = "You are not authorized to access this page."
-    redirect_to request.referrer
+    @department = Department.find_by(id: current_user.department_id)
+    redirect_to department_dep_time_table_path(@department)
   end
 end

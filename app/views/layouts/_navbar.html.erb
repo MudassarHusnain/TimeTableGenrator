@@ -48,25 +48,25 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item me-5">
-            <button class="nav-link active" aria-current="page" onclick="window.location.href='#'">Home</button>
+          <li class="nav-item me-3">
+            <%@department = Department.find_by(id: current_user.department_id)%>
+
+         <%= link_to "Home",department_dep_time_table_path(@department),class:"nav-link active"%>
           </li>
-          <li class="nav-item me-5">
-            <%= link_to "Department Time Table", department_dep_time_table_path(department_id: current_user.department_id), class: "nav-link" %>
-          </li>
-          <li class="nav-item me-5">
-           <%= link_to "Leave" , leave_requests_path,class: "nav-link" %>
+          
+          <li class="nav-item me-3">
+           <%= link_to "Leave Request" , leave_requests_path,class: "nav-link" %>
           </li>
           <li>
-            <%= link_to "Make Up", makeups_path,class: "nav-link" %>
+            <%= link_to "Make Up Request", makeups_path,class: "nav-link" %>
           </li>
 
           <%if current_user.present?%>
-            <li class="nav-item me-5">
+            <li class="nav-item me-3">
               <%= link_to "Logout",destroy_user_session_path,data:{turbo_method: :delete},class: "nav-link"%>
             </li>
           <%else%>
-            <li class="nav-item me-5">
+            <li class="nav-item me-3">
               <%= link_to "Login",new_user_session_path ,class: "nav-link"%>
             </li>
           <%end%>
@@ -84,22 +84,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item me-5">
-          <button class="nav-link active" aria-current="page" onclick="window.location.href='#'">Home</button>
+        <li class="nav-item me-3">
+          <%@department = Department.find_by(id: current_user.department_id)%>
+         <%= link_to "Home",department_dep_time_table_path(@department),class:"nav-link active"%>
         </li>
-        <li class="nav-item me-5">
-      <%= link_to "Department Time Table", department_dep_time_table_path(department_id: current_user.department_id), class: "nav-link" %>
-        </li>
-        <li class="nav-item me-5">
+       
+        <li class="nav-item me-3">
           <button class="nav-link" onclick="window.location.href='#'">Courses</button>
         </li>
         
         <%if current_user.present?%>
-        <li class="nav-item me-5">
+        <li class="nav-item me-3">
           <%= link_to "Logout",destroy_user_session_path,data:{turbo_method: :delete},class: "nav-link"%>
         </li>
         <%else%>
-        <li class="nav-item me-5">
+        <li class="nav-item me-3">
           <%= link_to "Login",new_user_session_path ,class: "nav-link"%>
         </li>
         <%end%>
