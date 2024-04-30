@@ -1,0 +1,74 @@
+<% if current_user.teacher? %>
+  <div class="container" style="margin-top: 10%; margin-left: 10%">
+    <%= link_to "Make Up Request", new_makeup_path,class: "btn btn-primary mb-4" %>
+
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+      <th>Course Name</th>
+      <th>Teacher Name</th>
+      <th>Slot</th>
+      <th> Approval Status</th>
+      <th>User ID</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @current_user_makeups.each do |makeup| %>
+        <tr>
+          <td><%= makeup.teacher_course.course.courseName %></td>
+          <td><%= makeup.teacher_course.teacher.name %></td>
+          <td>
+           <%= makeup.slot.start_time.strftime('%H:%M') %> To <%=makeup.slot.start_time.strftime('%H:%M') %>
+          </td>
+          <td>
+            <% if makeup.status %>
+              <span class="tick">&#10004;</span> <!-- Correct Tick -->
+            <% else %>
+              <span class="cross">&#10060;</span> <!-- Cross -->
+            <% end %>
+          </td>
+          </td>
+          <td><%= makeup.user_id %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<%elsif current_user.admin?%>
+  <div class="container" style="margin-top: 10%; margin-left: 10%">
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+      <tr>
+        <th>Course Name</th>
+        <th>Teacher Name</th>
+        <th>Slot</th>
+        <th> Approval Status</th>
+        <th>User ID</th>
+        <th>Manage Approval</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @makeups.each do |makeup| %>
+        <tr>
+          <td><%= makeup.teacher_course.course.courseName %></td>
+          <td><%= makeup.teacher_course.teacher.name %></td>
+          <td>
+            <%= makeup.slot.start_time.strftime('%H:%M') %> To <%=makeup.slot.start_time.strftime('%H:%M') %>
+          </td>
+          <td>
+            <% if makeup.status %>
+              <span class="tick">&#10004;</span> <!-- Correct Tick -->
+            <% else %>
+              <span class="cross">&#10060;</span> <!-- Cross -->
+            <% end %>
+          </td>
+          </td>
+          <td><%= makeup.user_id %></td>
+          <td><%= link_to "Approved",makeup_approved_path(makeup_id: makeup.id) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<%end %>

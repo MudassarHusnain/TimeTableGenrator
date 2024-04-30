@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_29_125423) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_30_131340) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,13 +51,27 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_29_125423) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "leave_requests", force: :cascade do |t|
+    t.string "user_name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean "status"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_leave_requests_on_user_id"
+  end
+
   create_table "makeups", force: :cascade do |t|
     t.integer "dep_class_id"
-    t.integer "slot"
+    t.integer "slot_id"
     t.integer "teacher_course_id"
     t.integer "days"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "status"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_makeups_on_user_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -120,6 +134,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_29_125423) do
   add_foreign_key "courses", "departments"
   add_foreign_key "dep_classes", "departments"
   add_foreign_key "dep_classes", "rooms"
+  add_foreign_key "leave_requests", "users"
+  add_foreign_key "makeups", "users"
   add_foreign_key "rooms", "departments"
   add_foreign_key "slots", "departments"
   add_foreign_key "teacher_courses", "courses"

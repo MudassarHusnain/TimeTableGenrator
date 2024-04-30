@@ -9,6 +9,15 @@ class Ability
     # Admin can manage all resources
     if user.admin?
       can :manage, :all
+    elsif user.teacher?
+      can :manage, Makeup
+      can :read, ClassCourseSlot
+      can :read, DepClass
+      can :download_pdf, DepClass
+      can :read ,Teacher
+      can :read, Course
+      can :read, Department
+      can :department_time_table, Department
     else
       # Teachers and students can only read ClassCourseSlot
       can :read, ClassCourseSlot

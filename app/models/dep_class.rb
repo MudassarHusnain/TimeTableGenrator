@@ -6,5 +6,5 @@ class DepClass < ApplicationRecord
   validates :name, presence: true
   validates :class_type, presence: true
   enum class_type: {morning: "morning",afternoon: "afternoon"}
-
+  has_many :makeups , :dependent=> :destroy
 end

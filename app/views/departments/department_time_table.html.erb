@@ -90,6 +90,18 @@ Course Name: <%= class_course_slot.teacher_course.course.courseName %>
                   Rooms #: <%= dep_class.room.name%>                <% end %>
               <% end %>
             </td>
+
+            <td>
+              <% dep_class.makeups.each do |class_course_slot| %>
+                <% if class_course_slot.slot_id == slot.id && class_course_slot.days == "day3" %>
+                  Course Name: <%= class_course_slot.teacher_course.course.courseName %>
+                  <br/>
+                  Rooms #: <%= dep_class.room.name%>
+                  <p>Status: <%= class_course_slot.status? ? "Approved" : "Pending" %></p>
+
+            <% end %>
+                  <%end %>
+            </td>
           </tr>
         <% end %>
         </tbody>

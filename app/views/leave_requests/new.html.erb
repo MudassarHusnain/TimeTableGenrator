@@ -1,0 +1,42 @@
+<%= form_for @leave_request do |form| %>
+  <% if @leave_request.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@leave_request.errors.count, "error") %> prohibited this class_course_slot from being saved:</h2>
+      <ul>
+        <% @leave_request.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <section class="ms-5 ps-3">
+    <div class="container">
+      <div class="signup-content">
+        <div class="signup-form">
+          <h2 class="form-title">Add Course In Class</h2>
+          <form method="POST" class="register-form" id="register-form">
+            <div class="form-group">
+              <%= form.datetime_field :start_date, placeholder: "Start Date",class: "fs-5"%>
+              <%= form.datetime_field :end_date, placeholder: "End Date",class: "fs-5"%>
+            </div>
+            <%= form.hidden_field :status, value: 0%>
+
+            <div class="form-group form-button">
+              <%= form.submit "Create Class", class: "form-submit fs-5" %>
+            </div>
+          </form>
+          <div>
+            <!-- Element to display the selected dep_class_id -->
+            <p id="selected-class-id"></p>
+            <!-- link_to "Back to Class Courses", department_dep_class_path(department, dep_class) -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<script>
+
+</script>

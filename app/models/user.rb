@@ -5,4 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum roles: {admin: 0, teacher: 1, student: 2}
+
+  has_many :leave_requests
+  has_many :makeups
 end

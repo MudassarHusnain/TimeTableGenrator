@@ -26,6 +26,22 @@
                                   {}, class: "ui item selection dropdown", id: 'dep-class-dropdown' %>
                 </div>
               </div>
+
+              <div class="mt-4 ui selection dropdown">
+                <%= form.hidden_field :teacher_course_id %>
+                <i class="dropdown icon"></i>
+                <div class="default text fs-5">Courses</div>
+                <div class="menu scrolling">
+                  <% @department.courses.each do |course| %>
+                    <% course.teacher_courses.each do |teacher_course| %>
+                      <% teacher = teacher_course.teacher %>
+                      <div class="item" data-value="<%= teacher_course.id %>">
+                        <%= "#{course.courseName.capitalize} - #{teacher.name}" %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
             </div>
 
             <% if alert %>
@@ -35,6 +51,8 @@
             <% end %>
 
             <%= form.hidden_field :slot_id, value: 1 %>
+            <%= form.hidden_field :status, value: 0%>
+
             <div class="form-group form-button">
               <%= form.submit "Create Class", class: "form-submit fs-5" %>
             </div>
@@ -51,15 +69,5 @@
 <% end %>
 
 <script>
-    console.log("JavaScript code is running");
 
-    const depClassDropdown = document.getElementById('dep-class-dropdown');
-    depClassDropdown.addEventListener('change', function() {
-        logSelectedDepClassId();
-    });
-
-    function logSelectedDepClassId() {
-        const selectedDepClassId = depClassDropdown.value;
-        console.log("Selected dep_class_id:", selectedDepClassId);
-    }
 </script>

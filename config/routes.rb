@@ -12,7 +12,10 @@ Rails.application.routes.draw do
     resources :slots
     get '/dep_time_table', to: 'departments#department_time_table'
   end
-  resource :makeups
+  resources :makeups
+  get '/makeup_approved', to: 'makeups#approved', as: 'makeup_approved'
+  resources :leave_requests
+  get '/leave_approved', to: 'leave_requests#approved', as: 'leave_approved'
   devise_for :users, controllers: {
     passwords: 'passwords/passwords',
     registrations: 'passwords/registrations',

@@ -819,3 +819,27 @@ body {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* app/assets/stylesheets/custom.css */
+.custom-dropdown {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #333;
+}
+
+.custom-dropdown option {
+  background-color: #fff;
+  color: #333;
+}
+
+.tick {
+  color: green; /* Green color for correct status */
+}
+
+.cross {
+  color: red; /* Red color for false status */
+}
+
