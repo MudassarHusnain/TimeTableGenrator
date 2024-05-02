@@ -12,7 +12,6 @@ class Passwords::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     @user = User.new(user_params)
-     debugger
     if @user.save
       UserMailer.welcome_email(@user).deliver_later(wait: 30.seconds)
       flash[:notice] = "you successfully signed up After few Minutes You will be Verified"

@@ -27,7 +27,6 @@ class Passwords::PasswordsController < Devise::PasswordsController
 
   # GET /resource/password/edit?reset_password_token=abcdef
   def edit
-    debugger
     @user = User.find_by(reset_password_token: params[:reset_password_token])
     if @user
       render :edit

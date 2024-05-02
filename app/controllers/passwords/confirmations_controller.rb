@@ -10,7 +10,6 @@ class Passwords::ConfirmationsController < Devise::ConfirmationsController
   #POST /resource/confirmation
   # def create
   #   super
-  #   debugger
   # end
 
   # GET /resource/confirmation?confirmation_token=abcdef
