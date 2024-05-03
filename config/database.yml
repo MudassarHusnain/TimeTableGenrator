@@ -19,10 +19,7 @@ development:
 #   host: localhost
 #   port: 5432
 
-# production:
-#   <<: *default
-#   database: your_database_name_production
-#   username: your_username
-#   password: your_password
-#   host: your_production_host
-#   port: your_production_port
+production:
+  <<: *default
+  database: timetablegenerator
+  username: postgres
