@@ -1,8 +1,8 @@
-databases:
-  - name: TimeTableGeneratorDB
-    databaseName: timetablegenerator_db
-    user: timetablegenerator_user
-    plan: free
+# databases:
+#   - name: TimeTableGeneratorDB
+#     databaseName: timetablegenerator_db
+#     user: timetablegenerator_user
+#     plan: free
 
 services:
 - type: web
