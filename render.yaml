@@ -4,6 +4,7 @@
 #     user: timetablegenerator_user
 #     plan: free
 
+# Exported from Render on 2024-05-07T10:15:15Z
 services:
 - type: web
   name: TimeTableGenrator
@@ -11,12 +12,12 @@ services:
   repo: https://github.com/MudassarHusnain/TimeTableGenrator
   plan: free
   envVars:
-  - key: 249244127561a319075299cf00d85899
+  - key: RAILS_MASTER_KEY
     sync: false
   - key: WEB_CONCURRENCY
     sync: false
   region: oregon
   buildCommand: bundle install; bundle exec rake assets:precompile; bundle exec rake
     assets:clean;
-  startCommand: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-production}
+  startCommand: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}
 version: "1"
