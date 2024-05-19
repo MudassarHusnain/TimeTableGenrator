@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <% Slot.all.each do |slot| %>
+      <% @department.slots.all.each do |slot| %>
         <tr>
           <td><%= "#{slot.start_time.strftime('%I:%M%P')} - #{slot.end_time.strftime('%I:%M%P')}" %></td>
             <td>
@@ -25,6 +25,9 @@
                   Course Name: <%= class_course_slot.teacher_course.course.courseName %>
                   <br/> 
                   Rooms #: <%= @dep_class.room.name%>
+                  <br/> 
+                  Teacher Name: <%= class_course_slot.teacher_course.teacher.name.capitalize%>       
+            
                 <% end %>
               <% end %>
             </td>
@@ -34,6 +37,9 @@
                  Course Name: <%= class_course_slot.teacher_course.course.courseName %>
                   <br/> 
                   Rooms #: <%= @dep_class.room.name%>
+                  <br/> 
+                  Teacher Name: <%= class_course_slot.teacher_course.teacher.name.capitalize%>             
+            
                 <% end %>
               <% end %>
             </td>
@@ -43,6 +49,9 @@
                  Course Name: <%= class_course_slot.teacher_course.course.courseName %>
                   <br/> 
                   Rooms #: <%= @dep_class.room.name%>
+                  <br/> 
+                  Teacher Name: <%= class_course_slot.teacher_course.teacher.name.capitalize%>              
+            
                 <% end %>
               <% end %>
             </td>
@@ -52,6 +61,9 @@
                   Course Name: <%= class_course_slot.teacher_course.course.courseName %>
                   <br/> 
                   Rooms #: <%= @dep_class.room.name%>
+                  <br/> 
+                  Teacher Name: <%= class_course_slot.teacher_course.teacher.name.capitalize%>        
+            
                 <% end %>
               <% end %>
             </td>

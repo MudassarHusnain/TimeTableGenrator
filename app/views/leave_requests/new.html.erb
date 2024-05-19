@@ -17,13 +17,19 @@
           <h2 class="form-title">Add Course In Class</h2>
           <form method="POST" class="register-form" id="register-form">
             <div class="form-group">
-              <%= form.datetime_field :start_date, placeholder: "Start Date",class: "fs-5"%>
-              <%= form.datetime_field :end_date, placeholder: "End Date",class: "fs-5"%>
-            </div>
+  <%= form.label :start_date, "Start Date", class: "fs-5 mb-5" %>
+  <%= form.datetime_field :start_date, class: " fs-5 mt-5",style:"margin-top:" %>
+</div>
+
+<div class="form-group">
+  <%= form.label :end_date, "End Date", class: "fs-5 mb-5" %>
+  <%= form.datetime_field :end_date, class: " fs-5 mt-5" %>
+</div>
+              <%= form.text_field :reason,placeholder: "Reason For Leave", class: "fs-5 mt-5"%>
             <%= form.hidden_field :status, value: 0%>
 
             <div class="form-group form-button">
-              <%= form.submit "Create Class", class: "form-submit fs-5" %>
+              <%= form.submit "Create Leave Request", class: "form-submit fs-5" %>
             </div>
           </form>
           <div>

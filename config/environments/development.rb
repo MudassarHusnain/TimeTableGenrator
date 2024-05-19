@@ -83,4 +83,8 @@ Rails.application.configure do
     user_name: Rails.application.credentials.dig(:email, :username),
     password: Rails.application.credentials.dig(:email, :password)
   }
+
+
+  config.hosts << "0f67-103-4-95-6.ngrok-free.app"
+
 end

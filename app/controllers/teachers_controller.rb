@@ -44,7 +44,6 @@ class TeachersController < ApplicationController
   # PATCH/PUT /teachers/1 or /teachers/1.json
   def update
     @department = Department.find_by(id: params[:department_id])
-    debugger
     respond_to do |format|
       if @teacher.update(teacher_params)
         format.html { redirect_to department_teachers_url(@department,@teacher), notice: "Teacher was successfully updated." }

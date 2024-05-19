@@ -27,7 +27,7 @@ class CoursesController < ApplicationController
   def create
     @teacher = Teacher.find(params[:course][:teacher_id])
     @department = Department.find(params[:department_id])
-    @course = Course.find_by(courseName: course_params[:courseName]) || @department.courses.new(course_params)
+    @course = @department.courses.find_by(courseName: course_params[:courseName]) || @department.courses.new(course_params)
     if !TeacherCourse.where(course_id:@course.id,teacher_id: @teacher.id).empty?
       flash[:notice] = "Teacher Alreday Teach this Subject."
       redirect_to new_department_course_path(@department) and return
@@ -61,10 +61,15 @@ class CoursesController < ApplicationController
 
   # DELETE /courses/1 or /courses/1.json
   def destroy
+    debugger
+    @course.class_course_slots.delete_all
+    @course.teacher_courses.delete_all
+    
     @course.destroy
-
+    @department = Department.find_by(id: paras[:department_id])
+    debugger
     respond_to do |format|
-      format.html { redirect_to department_courses_url, notice: "Course was successfully destroyed." }
+      format.html { redirect_to department_courses_url(), notice: "Course was successfully destroyed." }
       format.json { head :no_content }
     end
   end
