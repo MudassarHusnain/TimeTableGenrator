@@ -7,7 +7,7 @@ class Makeup < ApplicationRecord
   validates :teacher_course_id, uniqueness: { scope: :dep_class_id, message: "combination already exists" }
   validates :teacher_course_id, presence: true
 
-  enum days: { day1: 1, day2: 2,day3: 3 }
+  enum days: { day1: 1, day2: 2, day3: 3 }
 
   def self.get_the_teacher_used_slots(teacher,day)
     reserved_slots = self.joins(:teacher_course)
